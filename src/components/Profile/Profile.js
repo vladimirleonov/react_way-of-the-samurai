@@ -12,7 +12,10 @@ const Profile = (props) => {
         <div className={s.profile}>
             <BigImg/>
             <ProfileInfo/>
-            <MyPosts postData={props.profileState.postData} addPost={props.addPost}/>
+            <MyPosts postData={props.profileState.postData}
+                     addPost={props.addPost}
+                     changeNewPostValue={props.changeNewPostValue}
+                     newMassageValue={props.profileState.textareaValue}/>
         </div>
     )
 }

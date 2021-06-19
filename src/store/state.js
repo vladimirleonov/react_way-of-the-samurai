@@ -1,5 +1,4 @@
 import React from 'react';
-import rerenderApp from "../rerender";
 
 const state = {
     profilePage: {
@@ -7,7 +6,8 @@ const state = {
             { id: '1', text: 'fsreggx fgh fhgfhf', likeCount: '12'},
             { id: '2', text: 'gjgjgh fhg', likeCount: '9'},
             { id: '3', text: 'qwerty', likeCount: '11'}
-        ]
+        ],
+        textareaValue: ''
     },
     messagesPage: {
         dialogItems: [
@@ -18,30 +18,53 @@ const state = {
             {id: '1', userName: "Dimych", message: "sfs fsddgfd gdf gfdgdgdf gfghjkh ry"},
             {id: '2', userName: "Me", message: "sdfwre ertreyrt yrtyry yryrgf ddghgtj tuytyrd dfgsdg gg ryryrthf ryrtyrt"},
             {id: '3', userName: "Dimych", message: "qe wer werwrwr wgdghty jjyjju yujyukgf ertd ewdsgdgetw ete"}
-        ]
+        ],
+        inputValue:''
     }
 }
 
-export const addPost = function(data) {
+export const addPost = function() {
     state.profilePage.postData.push(
         {
             id: '4',
-            text: data,
+            text: state.profilePage.textareaValue,
             likeCount: '3'
         }
     );
-    rerenderApp(state, addPost, addMessage);
+    state.profilePage.textareaValue = '';
+    rerenderApp(state);
 }
 
-export function addMessage(data) {
+export function addMessage() {
     state.messagesPage.messages.push(
         {
             id: '4',
             userName: "Me",
-            message: data
+            message: state.messagesPage.inputValue
         }
     );
-    rerenderApp(state, addPost, addMessage);
+    state.messagesPage.inputValue = '';
+    rerenderApp(state);
 }
+
+export function changeNewPostValue(data) {
+    state.profilePage.textareaValue = data;
+    rerenderApp(state);
+}
+
+export function changeNewMessageValue(data) {
+    state.messagesPage.inputValue = data;
+    rerenderApp(state);
+}
+
+
+
+let rerenderApp = function () { }
+
+export const subscribe = (observer) => {
+    rerenderApp = observer;
+}
+
+
 
 export default state;

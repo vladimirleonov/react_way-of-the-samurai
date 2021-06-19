@@ -11,15 +11,21 @@ const MyPosts = (props) => {
     const textareaRef = React.createRef();
 
     function onAddPost() {
-        const textareaValue = textareaRef.current.value;
-        props.addPost(textareaValue);
+        props.addPost();
+        textareaRef.current.value = props.newMassageValue;
+    }
+
+    function onChangeTextareaValue() {
+        let textareaValue = textareaRef.current.value;
+        /*console.log(textareaValue);*/
+        props.changeNewPostValue(textareaValue);
     }
 
     return (
         <div className={s.my__posts}>
             <div className={s.header}>My posts</div>
             <form action="#" className={s.new__post}>
-                <textarea ref={textareaRef} name="news" id="33" cols="30" rows="3"></textarea>
+                <textarea ref={textareaRef} onChange={onChangeTextareaValue} name="news" id="33" cols="30" rows="3"></textarea>
                 <button className={s.btn} onClick={onAddPost} type="button">Send</button>
             </form>
             <div className={s.posts}>

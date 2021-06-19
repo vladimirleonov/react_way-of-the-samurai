@@ -3,6 +3,7 @@ import s from './Messages.module.css';
 
 import DialogItem from "./DialogItem/DialogItem";
 import MessageItem from "./MessageItem/MessageItem";
+import {changeNewMessageValue} from "../../store/state";
 
 const Messages = (props) => {
 
@@ -17,8 +18,15 @@ const Messages = (props) => {
     const textInputRef = React.createRef();
 
     function onAddMessage() {
-        const newMessageText = textInputRef.current.value;
-        props.addMessage(newMessageText);
+        /*const newMessageText = textInputRef.current.value;*/
+        props.addMessage();
+        textInputRef.current.value = props.messagesState.inputValue;
+    }
+
+    function onChangeInputValue () {
+        /*const newMessageText = textInputRef.current.value;*/
+        console.log(textInputRef.current.value);
+        props.changeNewMessageValue(textInputRef.current.value);
     }
 
     return (
@@ -32,7 +40,10 @@ const Messages = (props) => {
                 </div>
                 <div className={s.newMessage}>
                     <form action="#">
-                        <input ref={textInputRef} type="text"/>
+                        <input ref={textInputRef}
+                               onChange={onChangeInputValue}
+                               type="text"
+                               value={props.inputValue}/>
                         <button onClick={onAddMessage} type='button'>
                             Send
                         </button>

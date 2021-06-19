@@ -25,8 +25,16 @@ function App(props) {
           <Route path='/settings' component={Settings}/>
       </div>*/}
         <div className={s.content}>
-            <Route exact path='/'> <Profile profileState={props.appState.profilePage} addPost={props.addPost}/> </Route>
-            <Route path='/messages'> <Messages messagesState={props.appState.messagesPage} messages={props.messages} addMessage={props.addMessage}/> </Route>
+            <Route exact path='/'>
+                <Profile profileState={props.appState.profilePage}
+                         addPost={props.addPost}
+                         changeNewPostValue={props.changeNewPostValue}/>
+            </Route>
+            <Route path='/messages'>
+                <Messages messagesState={props.appState.messagesPage}
+                          addMessage={props.addMessage}
+                          changeNewMessageValue={props.changeNewMessageValue}/>
+            </Route>
             <Route path='/news'> <News/> </Route>
             <Route path='/music'> <Music/> </Route>
             <Route path='/settings'> <Settings/> </Route>
