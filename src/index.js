@@ -5,7 +5,7 @@ import store from "./store/store";
 import App from "./App";
 import { BrowserRouter as Router } from "react-router-dom";
 
-function rerenderApp() {
+function rerenderApp(store) {
     debugger;
     ReactDOM.render(
             <Router>
@@ -16,7 +16,7 @@ function rerenderApp() {
     );
 }
 
-rerenderApp();
+rerenderApp(store);
 
 store.subscribe(rerenderApp);
 

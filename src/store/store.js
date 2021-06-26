@@ -26,22 +26,9 @@ let store = {
     },
     dispatch(action) {
         switch(action.type) {
-            case 'ADD-POST':
-                debugger;
-                this._state.profilePage.postData.push(
-                    {
-                        id: 4,
-                        text: this._state.profilePage.newPostValue,
-                        likeCount: '3'
-                    }
-                );
-                this._state.profilePage.newPostValue = '';
-                this._callSubscriber();
-            case 'CHANGE-NEW-POST-VALUE':
-                debugger;
-                this._state.profilePage.newPostValue = action.data;
-                this._callSubscriber();
             case 'ADD-MESSAGE':
+                debugger;
+            {
                 debugger;
                 this._state.messagesPage.messages.push(
                     {
@@ -51,11 +38,34 @@ let store = {
                     }
                 );
                 this._state.messagesPage.newMessageValue = '';
-                this._callSubscriber();
-            case 'CHANGE-NEW-MESSAGE-VALUE':
+                this._callSubscriber(store);
+                break;
+            }
+            case 'CHANGE-NEW-MESSAGE-VALUE':{
                 debugger;
                 this._state.messagesPage.newMessageValue = action.data;
-                this._callSubscriber();
+                this._callSubscriber(store);
+                break;
+            }
+            case 'ADD-POST': {
+                debugger;
+                this._state.profilePage.postData.push(
+                    {
+                        id: 4,
+                        text: this._state.profilePage.newPostValue,
+                        likeCount: '3'
+                    }
+                );
+                this._state.profilePage.newPostValue = '';
+                this._callSubscriber(store);
+                break;
+            }
+            case 'CHANGE-NEW-POST-VALUE': {
+                debugger;
+                this._state.profilePage.newPostValue = action.data;
+                this._callSubscriber(store);
+                break;
+            }
         }
     },
 

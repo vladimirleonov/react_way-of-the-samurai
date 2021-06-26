@@ -25,7 +25,7 @@ const MyPosts = (props) => {
         <div className={s.my__posts}>
             <div className={s.header}>My posts</div>
             <form action="#" className={s.new__post}>
-                <textarea ref={textareaRef} onChange={onChangeTextareaValue} value={props.postValue} name="news" id="33" cols="30" rows="3"></textarea>
+                <textarea ref={textareaRef} onChange={onChangeTextareaValue} value={props.newPostValue} name="news" id="33" cols="30" rows="3"></textarea>
                 <button className={s.btn} onClick={onAddPost} type="button">Send</button>
             </form>
             <div className={s.posts}>
