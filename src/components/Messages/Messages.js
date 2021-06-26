@@ -3,30 +3,30 @@ import s from './Messages.module.css';
 
 import DialogItem from "./DialogItem/DialogItem";
 import MessageItem from "./MessageItem/MessageItem";
-import {changeNewMessageValue} from "../../store/state";
+
 
 const Messages = (props) => {
-
+    debugger;
     const newDialogItems = props.messagesState.dialogItems.map((item) => {
+        debugger;
         return <DialogItem name={item.name} id={item.id}/>;
     });
 
     const newMessages = props.messagesState.messages.map((item)=>{
+        debugger;
         return <MessageItem userName={item.userName} message={item.message}/>;
     })
 
     const textInputRef = React.createRef();
 
     function onAddMessage() {
-        /*const newMessageText = textInputRef.current.value;*/
-        props.addMessage();
-        textInputRef.current.value = props.messagesState.inputValue;
+        debugger;
+        props.dispatch({type: 'ADD-MESSAGE'});
     }
 
-    function onChangeInputValue () {
-        /*const newMessageText = textInputRef.current.value;*/
-        console.log(textInputRef.current.value);
-        props.changeNewMessageValue(textInputRef.current.value);
+    function onChangeNewMessageValue () {
+        debugger;
+        props.dispatch({type: 'CHANGE-NEW-MESSAGE-VALUE', data: textInputRef.current.value});
     }
 
     return (
@@ -41,9 +41,9 @@ const Messages = (props) => {
                 <div className={s.newMessage}>
                     <form action="#">
                         <input ref={textInputRef}
-                               onChange={onChangeInputValue}
+                               onChange={onChangeNewMessageValue}
                                type="text"
-                               value={props.inputValue}/>
+                               value={props.messagesState.newMessageValue}/>
                         <button onClick={onAddMessage} type='button'>
                             Send
                         </button>

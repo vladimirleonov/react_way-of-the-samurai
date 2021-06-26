@@ -7,15 +7,15 @@ import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import MyPosts from "./MyPosts/MyPosts";
 
 const Profile = (props) => {
-
+    debugger;
     return(
         <div className={s.profile}>
             <BigImg/>
             <ProfileInfo/>
             <MyPosts postData={props.profileState.postData}
-                     addPost={props.addPost}
-                     changeNewPostValue={props.changeNewPostValue}
-                     newMassageValue={props.profileState.textareaValue}/>
+                     newPostValue={props.profileState.newPostValue}
+                     dispatch={props.dispatch}
+            />
         </div>
     )
 }
