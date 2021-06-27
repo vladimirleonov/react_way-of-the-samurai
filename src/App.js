@@ -12,7 +12,6 @@ import Settings from "./components/Settings/Settings";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 function App(props) {
-    debugger;
   return (
     <div className={s.app}>
       <Header/>

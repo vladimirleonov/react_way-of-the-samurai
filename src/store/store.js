@@ -1,10 +1,14 @@
+import profileReducer from "./profile-reducer";
+import messagesReducer from "./messages-reducer";
+
+
 let store = {
     _state: {
         profilePage: {
             postData: [
-                { id: 1, text: 'fsreggx fgh fhgfhf', likeCount: '12'},
-                { id: 2, text: 'gjgjgh fhg', likeCount: '9'},
-                { id: 3, text: 'qwerty', likeCount: '11'}
+                { id: 1, text: 'fsreggx fgh fhgfhf', likeCount: 12},
+                { id: 2, text: 'gjgjgh fhg', likeCount: 9},
+                { id: 3, text: 'qwerty', likeCount: 11}
             ],
             newPostValue: ''
         },
@@ -25,48 +29,10 @@ let store = {
         return this._state;
     },
     dispatch(action) {
-        switch(action.type) {
-            case 'ADD-MESSAGE':
-                debugger;
-            {
-                debugger;
-                this._state.messagesPage.messages.push(
-                    {
-                        id: 4,
-                        userName: "Me",
-                        message: this._state.messagesPage.newMessageValue
-                    }
-                );
-                this._state.messagesPage.newMessageValue = '';
-                this._callSubscriber(store);
-                break;
-            }
-            case 'CHANGE-NEW-MESSAGE-VALUE':{
-                debugger;
-                this._state.messagesPage.newMessageValue = action.data;
-                this._callSubscriber(store);
-                break;
-            }
-            case 'ADD-POST': {
-                debugger;
-                this._state.profilePage.postData.push(
-                    {
-                        id: 4,
-                        text: this._state.profilePage.newPostValue,
-                        likeCount: '3'
-                    }
-                );
-                this._state.profilePage.newPostValue = '';
-                this._callSubscriber(store);
-                break;
-            }
-            case 'CHANGE-NEW-POST-VALUE': {
-                debugger;
-                this._state.profilePage.newPostValue = action.data;
-                this._callSubscriber(store);
-                break;
-            }
-        }
+        profileReducer(this._state, action);
+        messagesReducer(this._state, action);
+
+        this._callSubscriber(store);
     },
 
     _callSubscriber () { },
