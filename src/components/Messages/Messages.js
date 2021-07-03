@@ -3,10 +3,10 @@ import s from './Messages.module.css';
 
 import DialogItem from "./DialogItem/DialogItem";
 import MessageItem from "./MessageItem/MessageItem";
-import {addMessageActionCreator, changeNewMessageTextActionCreator} from "../../store/messages-reducer";
 
 
 const Messages = (props) => {
+    debugger;
     const newDialogItems = props.messagesState.dialogItems.map((item) => {
         return <DialogItem name={item.name} id={item.id}/>;
     });
@@ -18,13 +18,11 @@ const Messages = (props) => {
     const textInputRef = React.createRef();
 
     function onAddMessage() {
-        props.dispatch(addMessageActionCreator());
-        /*props.dispatch({type: 'ADD-MESSAGE'});*/
+        props.onAddMessage();
     }
 
     function onChangeNewMessageValue () {
-        props.dispatch(changeNewMessageTextActionCreator(textInputRef.current.value));
-        /*props.dispatch({type: 'CHANGE-NEW-MESSAGE-VALUE', data: textInputRef.current.value});*/
+        props.onChangeNewMessageValue(textInputRef.current.value);
     }
 
     return (

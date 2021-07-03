@@ -29,8 +29,9 @@ let store = {
         return this._state;
     },
     dispatch(action) {
-        profileReducer(this._state, action);
-        messagesReducer(this._state, action);
+        debugger;
+        profileReducer(this._state.profilePage, action);
+        messagesReducer(this._state.messagesPage, action);
 
         this._callSubscriber(store);
     },

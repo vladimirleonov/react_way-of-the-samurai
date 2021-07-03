@@ -1,24 +1,27 @@
 import './index.css';
 import React from 'react';
 import ReactDOM from "react-dom";
-import store from "./store/store";
+import store from "./store/redux-store";
 import App from "./App";
 import { BrowserRouter as Router } from "react-router-dom";
 
-function rerenderApp(store) {
+function rerenderApp(state) {
     debugger;
     ReactDOM.render(
             <Router>
-                <App appState={store.getState()}
+                <App appState={state}
                      dispatch={store.dispatch.bind(store)}/>
             </Router>,
         document.getElementById('root')
     );
 }
 
-rerenderApp(store);
+rerenderApp(store.getState());
 
-store.subscribe(rerenderApp);
+store.subscribe(()=>{
+    let state = store.getState();
+    rerenderApp(state);
+});
 
 
 

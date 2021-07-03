@@ -2,10 +2,8 @@ import React from 'react';
 import s from './MyPosts.module.css';
 import Post from './Post/Post';
 
-import {addPostActionCreator, changeNewPostTextActionCreator} from "../../../store/profile-reducer";
-
 const MyPosts = (props) => {
-
+    debugger;
     const newPostData = props.postData.map((item) => {
         return <Post text={item.text} likeCount={item.likeCount}/>
     })
@@ -13,13 +11,12 @@ const MyPosts = (props) => {
     const textareaRef = React.createRef();
 
     function onAddPost() {
-        /*props.dispatch({type: 'ADD-POST'});*/
-        props.dispatch(addPostActionCreator());
+        props.onAddPost();
     }
 
     function onChangeTextareaValue() {
-        /*props.dispatch({type: 'CHANGE-NEW-POST-VALUE', data: textareaRef.current.value});*/
-        props.dispatch(changeNewPostTextActionCreator(textareaRef.current.value));
+        debugger;
+        props.onChangeTextareaValue(textareaRef.current.value);
     }
 
     return (
