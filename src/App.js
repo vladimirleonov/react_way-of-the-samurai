@@ -11,20 +11,16 @@ import Settings from "./components/Settings/Settings";
 
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
-function App(props) {
+import StoreContext from "./StoreContext";
+
+function App() {
   return (
     <div className={s.app}>
       <Header/>
       <Nav/>
         <div className={s.content}>
-            <Route exact path='/'>
-                <Profile profileState={props.appState.profilePage}
-                         dispatch={props.dispatch}/>
-            </Route>
-            <Route path='/messages'>
-                <MessagesContainer messagesState={props.appState.messagesPage}
-                          dispatch={props.dispatch}/>
-            </Route>
+            <Route exact path='/'><Profile /></Route>
+            <Route path='/messages'><MessagesContainer /></Route>
             <Route path='/news'> <News/> </Route>
             <Route path='/music'> <Music/> </Route>
             <Route path='/settings'> <Settings/> </Route>

@@ -4,13 +4,15 @@ import ReactDOM from "react-dom";
 import store from "./store/redux-store";
 import App from "./App";
 import { BrowserRouter as Router } from "react-router-dom";
+import StoreContext from "./StoreContext";
 
 function rerenderApp(state) {
     debugger;
     ReactDOM.render(
             <Router>
-                <App appState={state}
-                     dispatch={store.dispatch.bind(store)}/>
+                <StoreContext.Provider value={store}>
+                    <App />
+                </StoreContext.Provider>
             </Router>,
         document.getElementById('root')
     );

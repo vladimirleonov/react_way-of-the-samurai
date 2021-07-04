@@ -6,15 +6,12 @@ import BigImg from './BigImg/BigImg';
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import MyPostsContainer from "./MyPosts/MyPostsContainer";
 
-const Profile = (props) => {
+const Profile = () => {
     return(
         <div className={s.profile}>
             <BigImg/>
             <ProfileInfo/>
-            <MyPostsContainer postData={props.profileState.postData}
-                     newPostValue={props.profileState.newPostValue}
-                     dispatch={props.dispatch}
-            />
+            <MyPostsContainer />
         </div>
     )
 }
