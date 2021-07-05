@@ -4,15 +4,15 @@ import ReactDOM from "react-dom";
 import store from "./store/redux-store";
 import App from "./App";
 import { BrowserRouter as Router } from "react-router-dom";
-import StoreContext from "./StoreContext";
+import {Provider} from "react-redux";
 
-function rerenderApp(state) {
+function rerenderApp() {
     debugger;
     ReactDOM.render(
             <Router>
-                <StoreContext.Provider value={store}>
+                <Provider value={store}>
                     <App />
-                </StoreContext.Provider>
+                </Provider>
             </Router>,
         document.getElementById('root')
     );
@@ -21,8 +21,7 @@ function rerenderApp(state) {
 rerenderApp(store.getState());
 
 store.subscribe(()=>{
-    let state = store.getState();
-    rerenderApp(state);
+    rerenderApp();
 });
 
 
