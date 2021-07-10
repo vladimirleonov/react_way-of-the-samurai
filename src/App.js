@@ -25,7 +25,7 @@ function App() {
             <Route path='/messages'><MessagesContainer /></Route>
             <Route path='/news'> <News/> </Route>
             <Route path='/music'> <Music/> </Route>
-            <Route path='/users'> <Users/> </Route>
+            <Route path='/users'> <UsersContainer/> </Route>
             <Route path='/settings'> <Settings/> </Route>
         </div>
     </div>
