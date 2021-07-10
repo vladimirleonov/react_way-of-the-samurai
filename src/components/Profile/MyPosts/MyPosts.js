@@ -11,6 +11,7 @@ const MyPosts = (props) => {
     const textareaRef = React.createRef();
 
     function onAddPost() {
+        debugger;
         props.onAddPost();
     }
 

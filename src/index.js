@@ -6,23 +6,16 @@ import App from "./App";
 import { BrowserRouter as Router } from "react-router-dom";
 import {Provider} from "react-redux";
 
-function rerenderApp() {
-    debugger;
-    ReactDOM.render(
-            <Router>
-                <Provider value={store}>
-                    <App />
-                </Provider>
-            </Router>,
-        document.getElementById('root')
-    );
-}
+ReactDOM.render(
+        <Router>
+            <Provider store={store}>
+                <App />
+            </Provider>
+        </Router>,
+    document.getElementById('root')
+);
 
-rerenderApp(store.getState());
 
-store.subscribe(()=>{
-    rerenderApp();
-});
 
 
 

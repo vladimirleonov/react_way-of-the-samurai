@@ -42,9 +42,11 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         onAddPost() {
+            debugger;
             dispatch(addPostActionCreator());
         },
         onChangeTextareaValue(text) {
+            debugger;
             dispatch(changeNewPostTextActionCreator(text));
         }
     }

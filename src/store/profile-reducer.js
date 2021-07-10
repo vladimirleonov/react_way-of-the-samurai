@@ -13,23 +13,30 @@ const defaultState = {
 const profileReducer = (state=defaultState, action) => {
     switch(action.type) {
         case 'ADD-POST': {
-            state.postData.push(
+            const newPost =
                 {
                     id: 4,
                     text: state.newPostValue,
                     likeCount: 3
                 }
-            );
             state.newPostValue = '';
-            return state;
+            return {
+                ...state,
+                newPostValue: '',
+                postData: [...state.postData, newPost]
+            }
         }
         case 'CHANGE-NEW-POST-TEXT': {
             debugger;
-            state.newPostValue = action.newPostValue;
-            return state;
+            return {
+                ...state,
+                newPostValue: action.newPostValue
+            }
+        }
+        default: {
+            return state
         }
     }
-    return state;
 }
 
 export default profileReducer;

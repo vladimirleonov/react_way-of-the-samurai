@@ -18,22 +18,29 @@ const messagesReducer = (state=defaultState, action) => {
     switch(action.type) {
         case 'ADD-MESSAGE':
         {
-            state.messages.push(
+            const newMessage =
                 {
                     id: 4,
                     userName: "Me",
                     message: state.newMessageValue
                 }
-            );
             state.newMessageValue = '';
-            break;
+            return {
+                ...state,
+                newMessageValue: '',
+                messages: [...state.messages, newMessage]
+            }
         }
         case 'CHANGE-NEW-MESSAGE-TEXT':{
-            state.newMessageValue = action.newMessageValue;
-            break;
+            return {
+                ...state,
+                newMessageValue: action.newMessageValue
+            }
+        }
+        default: {
+            return state
         }
     }
-    return state;
 }
 
 export default messagesReducer;
