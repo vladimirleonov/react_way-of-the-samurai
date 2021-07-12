@@ -3,6 +3,19 @@ import s from './User.module.css';
 import ava1 from './ava1.jpg'
 
 const User = (props) => {
+
+   const follow = () => {
+        props.follow(props.userId)
+   }
+
+   const unfollow = () => {
+       props.unfollow(props.userId)
+   }
+
+    const btn = props.subscription ?  <button className={s.subscription__button} onClick={follow}>Follow</button>
+        : <button className={s.subscription__button} onClick={unfollow}>Unfollow</button>
+
+
     return (
         <div className={s.user}>
             <div className={s.ava__wrapper}>
@@ -19,7 +32,7 @@ const User = (props) => {
                     <span className={s.status}>{props.status}</span>
                 </div>
                 <div className={s.button__wrapper}>
-                    <button className={s.subscription__button}>{props.subscription}</button>
+                    {btn}
                 </div>
             </div>
         </div>
