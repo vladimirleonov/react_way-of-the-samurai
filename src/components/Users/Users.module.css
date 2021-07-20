@@ -11,6 +11,27 @@
 .users__wrapper {
     width: 100%;
 }
+.pagination__wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100px;
+}
+.pagination {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 100px;
+}
+.pagination span {
+    font-size: 20px;
+    margin: 0 3px;
+    padding: 0 3px;
+    cursor: pointer;
+}
+span.active__item {
+    font-weight: bold;
+    color: #e44d3a;
+}
 .btnmore__wrapper {
     display: flex;
     justify-content: center;

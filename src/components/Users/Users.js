@@ -20,6 +20,7 @@ const Users = (props) => {
         }
     }
 
+
     const users = props.users.map(item => <User id={item.id} name={item.name} status={item.status} photo={item.small} followed={item.followed} country={"item.location.country"} city={"item.location.city"}
                                                 follow={props.follow} unfollow={props.unfollow}/>);
 
