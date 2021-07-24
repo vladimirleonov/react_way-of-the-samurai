@@ -1,8 +1,10 @@
 import React from 'react'
 import Users from './Users'
 import {connect} from "react-redux";
-import {followActionCreator, unfollowActionCreator, setUsersActionCreator, setCurrentPageActionCreator, setTotalUsersCountActionCreator} from "../../store/users-reducer";
+import {followActionCreator, unfollowActionCreator, setUsersActionCreator,
+    setCurrentPageActionCreator, setTotalUsersCountActionCreator, toggleIsLoadingActionCreator} from "../../store/users-reducer";
 import * as axios from "axios";
+import Preloader from "../common/Preloader";
 
 class UsersContainerAPI extends React.Component {
     constructor(props) {
@@ -11,37 +13,57 @@ class UsersContainerAPI extends React.Component {
     }
 
     componentDidMount () {
+        debugger;
+        this.props.toggleIsLoading(true);
+
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
             .then((response) => {
                 debugger;
                 console.log(response.data);
-                this.props.setTotalUsersCount(response.data.totalCount);
+
+                this.props.toggleIsLoading(false);
+
                 this.props.setUsers(response.data.items);
+                this.props.setTotalUsersCount(response.data.totalCount);
                 debugger;
             })
     }
 
+    componentWillUnmount() {
+        this.props.setUsers([]);
+        this.props.setTotalUsersCount(null);
+    }
+
     setCurrentPage = (currentPage) => {
         debugger;
+
+        this.props.toggleIsLoading(true);
+
         this.props.setCurrentPage(currentPage);
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
             .then((response) => {
                 debugger;
-                this.props.setUsers(response.data.items)
+                this.props.toggleIsLoading(false);
+                this.props.setUsers(response.data.items);
             });
     }
 
     render () {
 
         return (
-            <Users users={this.props.users}
-                   totalUsersCount={this.props.totalUsersCount}
-                   pageSize={this.props.pageSize}
-                   currentPage={this.props.currentPage}
-                   follow={this.props.follow}
-                   unfollow={this.props.unfollow}
-                   setCurrentPage={this.props.setCurrentPage}
-            />
+            <>
+                {
+                    this.props.isLoading ? <Preloader/>
+                    : <Users users={this.props.users}
+                           totalUsersCount={this.props.totalUsersCount}
+                           pageSize={this.props.pageSize}
+                           currentPage={this.props.currentPage}
+                           follow={this.props.follow}
+                           unfollow={this.props.unfollow}
+                           setCurrentPage={this.setCurrentPage}
+                    />
+                }
+            </>
         )
     }
 }
@@ -51,7 +73,8 @@ const mapStateToProps = (state) => {
         users: state.usersPage.users,
         totalUsersCount: state.usersPage.totalUsersCount,
         pageSize: state.usersPage.pageSize,
-        currentPage: state.usersPage.currentPage
+        currentPage: state.usersPage.currentPage,
+        isLoading: state.usersPage.isLoading
     }
 }
 
@@ -76,6 +99,10 @@ const mapDispatchToProps = (dispatch) => {
         setTotalUsersCount(totalUsersCount) {
             debugger;
             dispatch(setTotalUsersCountActionCreator(totalUsersCount));
+        },
+        toggleIsLoading(value) {
+            debugger;
+            dispatch(toggleIsLoadingActionCreator(value))
         }
     }
 }

@@ -3,6 +3,7 @@ const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET-USERS';
 const SET_CURRENT_PAGE = 'SET-CURRENT-PAGE';
 const SET_TOTAL_USERS_COUNT = 'SET-TOTAL-USERS-COUNT';
+const IS_LOADING = 'IS-LOADING';
 
 const initialState = {
     users: [
@@ -10,9 +11,10 @@ const initialState = {
         {id: 2, userName: 'Svetlana D.', subscription: false, status: "I'm ready to help you", location: {country: 'Russia', city:'Moscow'}},
         {id:3, userName: 'Sergei S.', subscription: false, status: "I'm like football", location: {country: 'Ukrane', city: 'Kiev'}}*/
     ],
-    totalUsersCount: 21,
+    totalUsersCount: null,
     pageSize: 10,
-    currentPage: 1
+    currentPage: 1,
+    isLoading: false
 }
 
 const usersReducer = (state=initialState, action) => {
@@ -70,6 +72,13 @@ const usersReducer = (state=initialState, action) => {
                 totalUsersCount: action.totalUsersCount
             }
         }
+        case IS_LOADING: {
+            debugger;
+            return {
+                ...state,
+                isLoading: action.isLoading
+            }
+        }
         default: {
             return state
         }
@@ -113,6 +122,14 @@ export const setTotalUsersCountActionCreator = (totalUsersCount) => {
     return {
         type: SET_TOTAL_USERS_COUNT,
         totalUsersCount: totalUsersCount
+    }
+}
+
+export const toggleIsLoadingActionCreator = (value) => {
+    debugger;
+    return {
+        type: IS_LOADING,
+        isLoading: value
     }
 }
 
