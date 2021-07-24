@@ -1,6 +1,7 @@
 import React from 'react';
 import s from './User.module.css';
 import ava1 from './ava1.jpg'
+import {NavLink} from "react-router-dom";
 
 const User = (props) => {
 
@@ -19,7 +20,9 @@ const User = (props) => {
         <div className={s.user}>
             <div className={s.ava__wrapper}>
                 {/*<img src={ava1}/>*/}
-                <img src={ props.photo != null ? props.photo : ava1}/>
+                <NavLink to="/profile/2">
+                    <img src={ props.photo != null ? props.photo : ava1}/>
+                </NavLink>
             </div>
             <div className={s.content}>
                 <div className={s.text__wrapper}>

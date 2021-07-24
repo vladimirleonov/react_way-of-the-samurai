@@ -21,7 +21,8 @@ function App() {
       <Header/>
       <Nav/>
         <div className={s.content}>
-            <Route exact path='/'><Profile /></Route>
+            {/*<Route exact path='/'><Profile /></Route>*/}
+            <Route path='/profile'><Profile /></Route>
             <Route path='/messages'><MessagesContainer /></Route>
             <Route path='/news'> <News/> </Route>
             <Route path='/music'> <Music/> </Route>
