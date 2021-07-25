@@ -4,13 +4,16 @@ import {setProfileInfoActionCreator, toggleIsLoadingActionCreator} from "../../.
 import Preloader from "../../common/Preloader";
 import * as axios from 'axios';
 import {connect} from "react-redux";
+import { withRouter } from "react-router-dom";
 
 
 class ProfileInfoContainerAPI extends React.Component{
     componentDidMount () {
         debugger;
+        const userId = this.props.match.params.userId;
+        debugger;
         this.props.toggleIsLoading(true);
-        axios.get('https://social-network.samuraijs.com/api/1.0/profile/2')
+        axios.get('https://social-network.samuraijs.com/api/1.0/profile/' + userId)
             .then((response) => {
                 console.log(this.props.isLoading);
                 debugger;
@@ -51,6 +54,8 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-const ProfileInfoContainer = connect(mapStateToProps, mapDispatchToProps)(ProfileInfoContainerAPI);
+const withUrlDataProfileInfoContainer = withRouter(ProfileInfoContainerAPI)
+
+const ProfileInfoContainer = connect(mapStateToProps, mapDispatchToProps)(withUrlDataProfileInfoContainer);
 
 export default ProfileInfoContainer;

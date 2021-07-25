@@ -4,7 +4,7 @@ import ava1 from './ava1.jpg'
 import {NavLink} from "react-router-dom";
 
 const User = (props) => {
-
+    debugger;
    const follow = () => {
         props.follow(props.id)
    }
@@ -20,7 +20,7 @@ const User = (props) => {
         <div className={s.user}>
             <div className={s.ava__wrapper}>
                 {/*<img src={ava1}/>*/}
-                <NavLink to="/profile/2">
+                <NavLink to={"/profile/" + props.id}>
                     <img src={ props.photo != null ? props.photo : ava1}/>
                 </NavLink>
             </div>
