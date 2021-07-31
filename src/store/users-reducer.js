@@ -12,7 +12,7 @@ const initialState = {
         {id:3, userName: 'Sergei S.', subscription: false, status: "I'm like football", location: {country: 'Ukrane', city: 'Kiev'}}*/
     ],
     totalUsersCount: null,
-    pageSize: 10,
+    pageSize: 5,
     currentPage: 1,
     isLoading: false
 }

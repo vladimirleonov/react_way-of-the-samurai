@@ -1,7 +1,7 @@
 import logo from './logo.svg';
 import s from './App.module.css';
 
-import Header from "./components/Header/Header";
+import HeaderContainer from "./components/Header/HeaderContainer";
 import Nav from "./components/Nav/Nav";
 import Profile from "./components/Profile/Profile";
 import MessagesContainer from "./components/Messages/MessagesContainer";
@@ -18,7 +18,7 @@ import StoreContext from "./StoreContext";
 function App() {
   return (
     <div className={s.app}>
-      <Header/>
+      <HeaderContainer/>
       <Nav/>
         <div className={s.content}>
             {/*<Route exact path='/'><Profile /></Route>*/}

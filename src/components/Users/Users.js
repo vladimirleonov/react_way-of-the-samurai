@@ -17,7 +17,7 @@ const Users = (props) => {
             {/*<button onClick={this.getUsers}>Get Users</button>*/}
             <div className={s.users__wrapper}>
                 {
-                    props.users.map(item => <User key={item.id} id={item.id} name={item.name} status={item.status} photo={item.small} followed={item.followed} country={"item.location.country"} city={"item.location.city"}
+                    props.users.map(item => <User key={item.id} id={item.id} name={item.name} status={item.status} photo={item.photos.large} followed={item.followed} country={"item.location.country"} city={"item.location.city"}
                                                   follow={props.follow} unfollow={props.unfollow}/>)
                 }
             </div>
