@@ -22,12 +22,13 @@ const usersReducer = (state=initialState, action) => {
         case FOLLOW: {
             debugger;
             return {
+                ...state,
                 users: state.users.map(u =>
                     {
                         if(u.id === action.userId) {
                             return {
                                 ...u,
-                                followed: false
+                                followed: true
                             }
                         } else {
                             return u;
@@ -39,11 +40,12 @@ const usersReducer = (state=initialState, action) => {
         case UNFOLLOW: {
             debugger;
             return {
+                ...state,
                 users: state.users.map (u => {
                     if(u.id === action.userId) {
                         return {
                             ...u,
-                           followed: true
+                           followed: false
                         }
                     } else {
                         return u;
