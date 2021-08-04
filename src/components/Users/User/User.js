@@ -3,20 +3,22 @@ import s from './User.module.css';
 import ava1 from './ava1.jpg'
 import {NavLink} from "react-router-dom";
 import * as axios from 'axios';
+import {usersAPI} from "../../../api/api";
 
 const User = (props) => {
     debugger;
    const follow = () => {
-       axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${props.id}`, {},
+       /*axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${props.id}`, {},
            {
                withCredentials: true,
                headers: {
                    'API-KEY': '03dc85c1-6913-4689-96c3-0599c7316b8b'
                }
-           })
-           .then((response) => {
+           })*/
+       usersAPI.follow(props.id)
+           .then((data) => {
                debugger;
-               if (response.data.resultCode === 0) {
+               if (data.resultCode === 0) {
                    debugger;
                    props.follow(props.id);
                }
@@ -24,15 +26,16 @@ const User = (props) => {
    }
 
    const unfollow = () => {
-       axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${props.id}`,
+       /*axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${props.id}`,
            {
                withCredentials: true,
                headers: {
                    'API-KEY': '03dc85c1-6913-4689-96c3-0599c7316b8b'
                }
-           })
-           .then((response) => {
-               if (response.data.resultCode === 0) {
+           })*/
+       usersAPI.unfollow(props.id)
+           .then((data) => {
+               if (data.resultCode === 0) {
                    debugger;
                    props.unfollow(props.id);
                }

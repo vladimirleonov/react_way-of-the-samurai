@@ -5,8 +5,10 @@ import {followActionCreator, unfollowActionCreator, setUsersActionCreator,
     setCurrentPageActionCreator, setTotalUsersCountActionCreator, toggleIsLoadingActionCreator} from "../../store/users-reducer";
 import * as axios from "axios";
 import Preloader from "../common/Preloader";
+import {usersAPI} from "../../api/api";
 
 class UsersContainerAPI extends React.Component {
+    debugger;
     constructor(props) {
         super(props);
         this.props = props;
@@ -16,15 +18,16 @@ class UsersContainerAPI extends React.Component {
         debugger;
         this.props.toggleIsLoading(true);
 
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
-            .then((response) => {
+        //axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
+        usersAPI.getUsers(this.props.currentPage, this.props.pageSize)
+            .then((data) => {
                 debugger;
-                console.log(response.data);
+                console.log(data);
 
                 this.props.toggleIsLoading(false);
 
-                this.props.setUsers(response.data.items);
-                this.props.setTotalUsersCount(response.data.totalCount);
+                this.props.setUsers(data.items);
+                this.props.setTotalUsersCount(data.totalCount);
                 debugger;
             })
     }
@@ -40,11 +43,12 @@ class UsersContainerAPI extends React.Component {
         this.props.toggleIsLoading(true);
 
         this.props.setCurrentPage(currentPage);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${currentPage}&count=${this.props.pageSize}`)
-            .then((response) => {
+        //axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${currentPage}&count=${this.props.pageSize}`)
+        usersAPI.getUsers(currentPage, this.props.pageSize)
+            .then((data) => {
                 debugger;
                 this.props.toggleIsLoading(false);
-                this.props.setUsers(response.data.items);
+                this.props.setUsers(data.items);
             });
     }
 
@@ -69,6 +73,7 @@ class UsersContainerAPI extends React.Component {
 }
 
 const mapStateToProps = (state) => {
+    debugger;
     return {
         users: state.usersPage.users,
         totalUsersCount: state.usersPage.totalUsersCount,
@@ -79,6 +84,7 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
+    debugger;
     return {
         follow(userId) {
             debugger;

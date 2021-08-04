@@ -34,7 +34,7 @@ class HeaderContainerAPI extends React.Component{
 }
 
 const mapStateToProps = (state) => {
-    debugger;
+    //debugger;
     return {
         isAuth: state.auth.isAuth,
         login: state.auth.login
@@ -42,7 +42,7 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
-    debugger;
+    //debugger;
     return {
         setUserAuthData (id, email, login) {
             dispatch(setUserAuthDataActionCreator(id, email, login))

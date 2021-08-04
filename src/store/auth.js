@@ -10,7 +10,7 @@ const initialState = {
 const authReducer = (state = initialState, action) => {
     switch (action.type) {
         case SET_USER_AUTH_DATA: {
-            debugger;
+            //debugger;
             return {
                 ...state,
                 id: action.id,
@@ -20,7 +20,7 @@ const authReducer = (state = initialState, action) => {
             }
         }
         default: {
-            debugger;
+            //debugger;
             return state
         }
     }
