@@ -65,6 +65,7 @@ class UsersContainerAPI extends React.Component {
                            follow={this.props.follow}
                            unfollow={this.props.unfollow}
                            setCurrentPage={this.setCurrentPage}
+                           isDisabled={this.props.isDisabled}
                     />
                 }
             </>
@@ -79,7 +80,8 @@ const mapStateToProps = (state) => {
         totalUsersCount: state.usersPage.totalUsersCount,
         pageSize: state.usersPage.pageSize,
         currentPage: state.usersPage.currentPage,
-        isLoading: state.usersPage.isLoading
+        isLoading: state.usersPage.isLoading,
+        isDisabled: state.usersPage.isDisabled
     }
 }
 

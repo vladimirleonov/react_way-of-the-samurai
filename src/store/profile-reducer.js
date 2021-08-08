@@ -29,7 +29,7 @@ const defaultState = {
             large: null
         }
     },
-    isLoading: false
+    //isLoading: false
 }
 
 const profileReducer = (state=defaultState, action) => {
@@ -83,13 +83,13 @@ const profileReducer = (state=defaultState, action) => {
                 }
             }
         }
-        case IS_LOADING: {
+/*        case IS_LOADING: {
             debugger;
             return {
                 ...state,
                 isLoading: action.isLoading
             }
-        }
+        }*/
         default: {
             return state
         }
@@ -114,10 +114,11 @@ export const setProfileInfoActionCreator = (profileInfo) => {
     }
 }
 
+/*
 export const toggleIsLoadingActionCreator = (isLoading) => {
     debugger;
     return {
         type: IS_LOADING,
         isLoading
     }
-}
+}*/

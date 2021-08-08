@@ -42,8 +42,8 @@ const User = (props) => {
            })
    }
 
-    const btn = props.followed ?  <button className={s.subscription__button} onClick={unfollow}>Unfollow</button>
-        : <button className={s.subscription__button} onClick={follow}>Follow</button>
+    const btn = props.followed ?  <button disabled={props.isDisabled} className={s.subscription__button} onClick={unfollow}>Unfollow</button>
+        : <button disabled={props.isDisabled} className={s.subscription__button} onClick={follow}>Follow</button>
 
     return (
         <div className={s.user}>

@@ -28,3 +28,22 @@ export const usersAPI = {
     }
 }
 
+export const profileAPI = {
+    getUserProfile (userId) {
+        debugger;
+        //https://social-network.samuraijs.com/api/1.0/profile/' + userId
+        return instance.get(`profile/${userId}`)
+            .then((response) => {
+                debugger;
+                return response.data;
+            })
+    }
+}
+
+export const authMeAPI = {
+    getAuthData () {
+        return instance.get(`/auth/me`)
+            .then(response => response.data)
+    }
+}
+

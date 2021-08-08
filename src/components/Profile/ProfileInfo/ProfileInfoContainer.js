@@ -1,25 +1,24 @@
 import React from 'react';
 import ProfileInfo from "./ProfileInfo";
-import {setProfileInfoActionCreator, toggleIsLoadingActionCreator} from "../../../store/profile-reducer";
+import {setProfileInfoActionCreator} from "../../../store/profile-reducer";
 import Preloader from "../../common/Preloader";
 import * as axios from 'axios';
 import {connect} from "react-redux";
 import { withRouter } from "react-router-dom";
+
+import {profileAPI} from "../../../api/api";
 
 
 class ProfileInfoContainerAPI extends React.Component{
     componentDidMount () {
         debugger;
         const userId = this.props.match.params.userId;
-        debugger;
-        this.props.toggleIsLoading(true);
-        axios.get('https://social-network.samuraijs.com/api/1.0/profile/' + userId)
-            .then((response) => {
-                console.log(this.props.isLoading);
+        //axios.get('https://social-network.samuraijs.com/api/1.0/profile/' + userId)
+        profileAPI.getUserProfile(userId)
+            .then((data) => {
                 debugger;
-                this.props.toggleIsLoading(false);
-                console.log(response.data);
-                this.props.setProfileInfo(response.data);
+                console.log(data);
+                this.props.setProfileInfo(data);
             })
     }
     componentWillUnmount() {
@@ -28,10 +27,7 @@ class ProfileInfoContainerAPI extends React.Component{
 
     render () {
         return (
-            <>
-                {this.props.isLoading ? <Preloader/> :
-                    <ProfileInfo {...this.props.profileInfo}/>}
-            </>
+            <ProfileInfo {...this.props.profileInfo}/>
         )
     }
 }
@@ -45,9 +41,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        toggleIsLoading (isLoading) {
-            dispatch(toggleIsLoadingActionCreator(isLoading))
-        },
         setProfileInfo (profileInfo) {
             dispatch(setProfileInfoActionCreator(profileInfo))
         }

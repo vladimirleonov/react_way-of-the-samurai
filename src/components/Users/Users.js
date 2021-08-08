@@ -18,7 +18,7 @@ const Users = (props) => {
             <div className={s.users__wrapper}>
                 {
                     props.users.map(item => <User key={item.id} id={item.id} name={item.name} status={item.status} photo={item.photos.large} followed={item.followed} country={"item.location.country"} city={"item.location.city"}
-                                                  follow={props.follow} unfollow={props.unfollow}/>)
+                                                  follow={props.follow} unfollow={props.unfollow} isDisabled={props.isDisabled}/>)
                 }
             </div>
             <div className={s.pagination__wrapper}>

@@ -14,7 +14,8 @@ const initialState = {
     totalUsersCount: null,
     pageSize: 5,
     currentPage: 1,
-    isLoading: false
+    isLoading: false,
+    isDisabled: true,
 }
 
 const usersReducer = (state=initialState, action) => {
