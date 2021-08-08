@@ -4,6 +4,7 @@ const SET_USERS = 'SET-USERS';
 const SET_CURRENT_PAGE = 'SET-CURRENT-PAGE';
 const SET_TOTAL_USERS_COUNT = 'SET-TOTAL-USERS-COUNT';
 const IS_LOADING = 'IS-LOADING';
+const CHANGE_BUTTON_CONDITION = 'CHANGE-BUTTON-CONDITION';
 
 const initialState = {
     users: [
@@ -15,7 +16,7 @@ const initialState = {
     pageSize: 5,
     currentPage: 1,
     isLoading: false,
-    isDisabled: true,
+    arrayUsersWithDisabledId: []
 }
 
 const usersReducer = (state=initialState, action) => {
@@ -82,6 +83,16 @@ const usersReducer = (state=initialState, action) => {
                 isLoading: action.isLoading
             }
         }
+        case CHANGE_BUTTON_CONDITION: {
+            debugger;
+            return {
+                ...state,
+                arrayUsersWithDisabledId:
+                    action.isChangingBtnCondition
+                        ? [...state.arrayUsersWithDisabledId, action.userId]
+                        : state.arrayUsersWithDisabledId.filter(elem => elem!=action.userId)
+            }
+        }
         default: {
             return state
         }
@@ -133,6 +144,15 @@ export const toggleIsLoadingActionCreator = (value) => {
     return {
         type: IS_LOADING,
         isLoading: value
+    }
+}
+
+export const changeButtonConditionActionCreator = (isChangingBtnCondition, userId) => {
+    debugger;
+    return {
+        type: CHANGE_BUTTON_CONDITION,
+        isChangingBtnCondition,
+        userId
     }
 }
 

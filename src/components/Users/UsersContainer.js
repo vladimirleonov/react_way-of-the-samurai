@@ -2,7 +2,8 @@ import React from 'react'
 import Users from './Users'
 import {connect} from "react-redux";
 import {followActionCreator, unfollowActionCreator, setUsersActionCreator,
-    setCurrentPageActionCreator, setTotalUsersCountActionCreator, toggleIsLoadingActionCreator} from "../../store/users-reducer";
+    setCurrentPageActionCreator, setTotalUsersCountActionCreator, toggleIsLoadingActionCreator,
+    changeButtonConditionActionCreator} from "../../store/users-reducer";
 import * as axios from "axios";
 import Preloader from "../common/Preloader";
 import {usersAPI} from "../../api/api";
@@ -65,7 +66,8 @@ class UsersContainerAPI extends React.Component {
                            follow={this.props.follow}
                            unfollow={this.props.unfollow}
                            setCurrentPage={this.setCurrentPage}
-                           isDisabled={this.props.isDisabled}
+                           changeButtonCondition={this.props.changeButtonCondition}
+                           arrayUsersWithDisabledId={this.props.arrayUsersWithDisabledId}
                     />
                 }
             </>
@@ -81,7 +83,7 @@ const mapStateToProps = (state) => {
         pageSize: state.usersPage.pageSize,
         currentPage: state.usersPage.currentPage,
         isLoading: state.usersPage.isLoading,
-        isDisabled: state.usersPage.isDisabled
+        arrayUsersWithDisabledId: state.usersPage.arrayUsersWithDisabledId
     }
 }
 
@@ -111,6 +113,9 @@ const mapDispatchToProps = (dispatch) => {
         toggleIsLoading(value) {
             debugger;
             dispatch(toggleIsLoadingActionCreator(value))
+        },
+        changeButtonCondition(isChangingBtnCondition, userId) {
+            dispatch(changeButtonConditionActionCreator(isChangingBtnCondition, userId))
         }
     }
 }
