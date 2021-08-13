@@ -1,3 +1,5 @@
+import {profileAPI} from "../api/api";
+
 const ADD_POST = 'ADD-POST';
 const CHANGE_NEW_POST_TEXT = 'CHANGE-NEW-POST-TEXT';
 const SET_PROFILE_INFO = 'SET-PROFILE-INFO';
@@ -98,6 +100,8 @@ const profileReducer = (state=defaultState, action) => {
 
 export default profileReducer;
 
+// actions
+
 export const addPostActionCreator = () => ({type: ADD_POST});
 export const changeNewPostTextActionCreator = (data) => {
     return {
@@ -122,3 +126,17 @@ export const toggleIsLoadingActionCreator = (isLoading) => {
         isLoading
     }
 }*/
+
+
+//thunks
+
+export const getUserProfileThunkCreator = (userId) => {
+    return (dispatch) => {
+        profileAPI.getUserProfile(userId)
+            .then((data) => {
+                debugger;
+                console.log(data);
+                dispatch(setProfileInfoActionCreator(data));
+            })
+    }
+}

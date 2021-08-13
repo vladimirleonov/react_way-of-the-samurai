@@ -16,7 +16,8 @@ const User = (props) => {
                }
            })*/
        debugger;
-       props.changeButtonCondition(true, props.id);
+       props.follow(props.id)
+       /*props.changeButtonCondition(true, props.id);
        usersAPI.follow(props.id)
            .then((data) => {
                debugger;
@@ -26,7 +27,7 @@ const User = (props) => {
                    debugger;
                    props.follow(props.id);
                }
-           })
+           })*/
    }
 
    const unfollow = () => {
@@ -37,7 +38,8 @@ const User = (props) => {
                    'API-KEY': '03dc85c1-6913-4689-96c3-0599c7316b8b'
                }
            })*/
-       props.changeButtonCondition(true, props.id);
+       props.unfollow(props.id)
+       /*props.changeButtonCondition(true, props.id);
        usersAPI.unfollow(props.id)
            .then((data) => {
                if (data.resultCode === 0) {
@@ -45,7 +47,7 @@ const User = (props) => {
                    debugger;
                    props.unfollow(props.id);
                }
-           })
+           })*/
    }
     debugger;
     const btn = props.followed ?  <button disabled={props.arrayUsersWithDisabledId.some(elem => elem === props.id)} className={s.subscription__button} onClick={unfollow}>Unfollow</button>

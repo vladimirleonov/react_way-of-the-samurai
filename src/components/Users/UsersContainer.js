@@ -1,12 +1,9 @@
 import React from 'react'
 import Users from './Users'
 import {connect} from "react-redux";
-import {followActionCreator, unfollowActionCreator, setUsersActionCreator,
-    setCurrentPageActionCreator, setTotalUsersCountActionCreator, toggleIsLoadingActionCreator,
-    changeButtonConditionActionCreator} from "../../store/users-reducer";
-import * as axios from "axios";
+import {setCurrentPageActionCreator} from "../../store/users-reducer";
+import {setUsersThunkCreator, followThunkCreator, unfollowThunkCreator} from '../../store/users-reducer'
 import Preloader from "../common/Preloader";
-import {usersAPI} from "../../api/api";
 
 class UsersContainerAPI extends React.Component {
     debugger;
@@ -17,40 +14,16 @@ class UsersContainerAPI extends React.Component {
 
     componentDidMount () {
         debugger;
-        this.props.toggleIsLoading(true);
+        this.props.getUsers(this.props.currentPage, this.props.pageSize);
 
-        //axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
-        usersAPI.getUsers(this.props.currentPage, this.props.pageSize)
-            .then((data) => {
-                debugger;
-                console.log(data);
-
-                this.props.toggleIsLoading(false);
-
-                this.props.setUsers(data.items);
-                this.props.setTotalUsersCount(data.totalCount);
-                debugger;
-            })
     }
-
-/*    componentWillUnmount() {
-        this.props.setUsers([]);
-        this.props.setTotalUsersCount(null);
-    }*/
 
     setCurrentPage = (currentPage) => {
         debugger;
 
-        this.props.toggleIsLoading(true);
-
         this.props.setCurrentPage(currentPage);
-        //axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${currentPage}&count=${this.props.pageSize}`)
-        usersAPI.getUsers(currentPage, this.props.pageSize)
-            .then((data) => {
-                debugger;
-                this.props.toggleIsLoading(false);
-                this.props.setUsers(data.items);
-            });
+        this.props.getUsers(currentPage, this.props.pageSize);
+
     }
 
     render () {
@@ -87,7 +60,30 @@ const mapStateToProps = (state) => {
     }
 }
 
-const mapDispatchToProps = (dispatch) => {
+const UsersContainer = connect(mapStateToProps, {
+    setCurrentPage: setCurrentPageActionCreator,
+    getUsers: setUsersThunkCreator,
+    follow: followThunkCreator,
+    unfollow: unfollowThunkCreator
+})(UsersContainerAPI);
+
+export default UsersContainer;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*const mapDispatchToProps = (dispatch) => {
     debugger;
     return {
         follow(userId) {
@@ -123,4 +119,4 @@ const mapDispatchToProps = (dispatch) => {
 const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersContainerAPI);
 
 
-export default UsersContainer;
+export default UsersContainer;*/

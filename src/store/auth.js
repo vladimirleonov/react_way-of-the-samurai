@@ -1,3 +1,5 @@
+import {authMeAPI} from "../api/api";
+
 const SET_USER_AUTH_DATA = 'SET-USER-AUTH-DATA';
 
 const initialState = {
@@ -32,6 +34,22 @@ export const setUserAuthDataActionCreator = (id, email, login) => {
         id,
         email,
         login
+    }
+}
+
+export const getUserAuthDataThunkCreator = () => {
+    return (dispatch) => {
+        authMeAPI.getAuthData()
+            .then((data) => {
+                debugger;
+                if(data.resultCode === 0) {
+                    debugger;
+                    const {id, email, login} = data.data;
+                    debugger;
+                    dispatch(setUserAuthDataActionCreator(id, email, login));
+                    debugger;
+                }
+            })
     }
 }
 

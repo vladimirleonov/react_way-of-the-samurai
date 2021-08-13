@@ -1,3 +1,5 @@
+import {usersAPI} from "../api/api";
+
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET-USERS';
@@ -99,6 +101,8 @@ const usersReducer = (state=initialState, action) => {
     }
 }
 
+//actions
+
 export const followActionCreator = (userId) => {
     debugger;
     return {
@@ -153,6 +157,57 @@ export const changeButtonConditionActionCreator = (isChangingBtnCondition, userI
         type: CHANGE_BUTTON_CONDITION,
         isChangingBtnCondition,
         userId
+    }
+}
+
+//thunk creators
+
+export const setUsersThunkCreator = (currentPage, pageSize) => {
+    return (dispatch) => {
+        dispatch(toggleIsLoadingActionCreator(true));
+
+        //axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
+        usersAPI.getUsers(currentPage, pageSize)
+            .then((data) => {
+                debugger;
+                console.log(data);
+
+                dispatch(toggleIsLoadingActionCreator(false));
+                debugger;
+                dispatch(setUsersActionCreator(data.items));
+                dispatch(setTotalUsersCountActionCreator(data.totalCount));
+                debugger;
+            })
+    }
+}
+
+export const followThunkCreator = (userId) => {
+    return (dispatch) => {
+        dispatch(changeButtonConditionActionCreator(true, userId));
+        usersAPI.follow(userId)
+            .then((data) => {
+                debugger;
+                if (data.resultCode === 0) {
+                    debugger;
+                    dispatch(changeButtonConditionActionCreator(false, userId));
+                    debugger;
+                    dispatch(followActionCreator(userId));
+                }
+            })
+    }
+}
+
+export const unfollowThunkCreator = (userId) => {
+    return (dispatch) => {
+        dispatch(changeButtonConditionActionCreator(true, userId));
+        usersAPI.unfollow(userId)
+            .then((data) => {
+                if (data.resultCode === 0) {
+                    dispatch(changeButtonConditionActionCreator(false, props.id));
+                    debugger;
+                    dispatch(unfollowActionCreator(userId));
+                }
+            })
     }
 }
 

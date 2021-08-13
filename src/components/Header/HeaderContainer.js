@@ -6,6 +6,8 @@ import {connect} from "react-redux";
 import * as axios from 'axios';
 import {setUserAuthDataActionCreator} from "../../store/auth";
 
+import {getUserAuthDataThunkCreator} from "../../store/auth";
+
 import {authMeAPI} from "../../api/api";
 
 class HeaderContainerAPI extends React.Component{
@@ -15,7 +17,8 @@ class HeaderContainerAPI extends React.Component{
             {
                 withCredentials: true
             })*/
-        authMeAPI.getAuthData()
+        getUserAuthDataThunkCreator();
+        /*authMeAPI.getAuthData()
             .then((data) => {
                 debugger;
                 if(data.resultCode === 0) {
@@ -25,7 +28,7 @@ class HeaderContainerAPI extends React.Component{
                     this.props.setUserAuthData(id, email, login);
                     debugger;
                 }
-            })
+            })*/
     }
 
     render () {

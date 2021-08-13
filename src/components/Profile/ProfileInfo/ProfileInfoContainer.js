@@ -1,6 +1,6 @@
 import React from 'react';
 import ProfileInfo from "./ProfileInfo";
-import {setProfileInfoActionCreator} from "../../../store/profile-reducer";
+import {getUserProfileThunkCreator, setProfileInfoActionCreator} from "../../../store/profile-reducer";
 import Preloader from "../../common/Preloader";
 import * as axios from 'axios';
 import {connect} from "react-redux";
@@ -13,16 +13,16 @@ class ProfileInfoContainerAPI extends React.Component{
     componentDidMount () {
         debugger;
         const userId = this.props.match.params.userId;
+
+        getUserProfileThunkCreator(userId);
+
         //axios.get('https://social-network.samuraijs.com/api/1.0/profile/' + userId)
-        profileAPI.getUserProfile(userId)
+        /*profileAPI.getUserProfile(userId)
             .then((data) => {
                 debugger;
                 console.log(data);
                 this.props.setProfileInfo(data);
-            })
-    }
-    componentWillUnmount() {
-        //this.props.setProfileInfo(null);
+            })*/
     }
 
     render () {
@@ -39,16 +39,16 @@ const mapStateToProps = (state) => {
     }
 }
 
-const mapDispatchToProps = (dispatch) => {
+/*const mapDispatchToProps = (dispatch) => {
     return {
         setProfileInfo (profileInfo) {
             dispatch(setProfileInfoActionCreator(profileInfo))
         }
     }
-}
+}*/
 
 const withUrlDataProfileInfoContainer = withRouter(ProfileInfoContainerAPI)
 
-const ProfileInfoContainer = connect(mapStateToProps, mapDispatchToProps)(withUrlDataProfileInfoContainer);
+const ProfileInfoContainer = connect(mapStateToProps)(withUrlDataProfileInfoContainer);
 
 export default ProfileInfoContainer;
