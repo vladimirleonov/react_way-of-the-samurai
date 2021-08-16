@@ -7,6 +7,7 @@ import ProfileInfoContainer from "./ProfileInfo/ProfileInfoContainer";
 import MyPostsContainer from "./MyPosts/MyPostsContainer";
 
 const Profile = () => {
+    debugger;
     return(
         <div className={s.profile}>
             <BigImg/>

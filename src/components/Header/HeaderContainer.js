@@ -17,7 +17,7 @@ class HeaderContainerAPI extends React.Component{
             {
                 withCredentials: true
             })*/
-        getUserAuthDataThunkCreator();
+        this.props.getUserAuthData();
         /*authMeAPI.getAuthData()
             .then((data) => {
                 debugger;
@@ -47,15 +47,15 @@ const mapStateToProps = (state) => {
     }
 }
 
-const mapDispatchToProps = (dispatch) => {
+/*const mapDispatchToProps = (dispatch) => {
     //debugger;
     return {
         setUserAuthData (id, email, login) {
             dispatch(setUserAuthDataActionCreator(id, email, login))
         }
     }
-}
+}*/
 
-const HeaderContainer = connect(mapStateToProps, mapDispatchToProps)(HeaderContainerAPI);
+const HeaderContainer = connect(mapStateToProps, {getUserAuthData: getUserAuthDataThunkCreator})(HeaderContainerAPI);
 
 export default HeaderContainer;

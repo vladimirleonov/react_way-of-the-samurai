@@ -5,6 +5,7 @@ const instance = axios.create({
     withCredentials: true,
     headers: {
         'API-KEY': '03dc85c1-6913-4689-96c3-0599c7316b8b'
+
     }
 })
 
@@ -42,8 +43,12 @@ export const profileAPI = {
 
 export const authMeAPI = {
     getAuthData () {
+        debugger;
         return instance.get(`/auth/me`)
-            .then(response => response.data)
+            .then((response) => {
+                debugger;
+                return response.data;
+            })
     }
 }
 
