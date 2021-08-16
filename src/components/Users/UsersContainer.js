@@ -4,6 +4,7 @@ import {connect} from "react-redux";
 import {setCurrentPageActionCreator} from "../../store/users-reducer";
 import {setUsersThunkCreator, followThunkCreator, unfollowThunkCreator} from '../../store/users-reducer'
 import Preloader from "../common/Preloader";
+import withAuthRedirect from "../../hoc/withAuthRedirect";
 
 class UsersContainerAPI extends React.Component {
     debugger;
@@ -60,12 +61,14 @@ const mapStateToProps = (state) => {
     }
 }
 
+const withAuthRedirectContainer = withAuthRedirect(UsersContainerAPI);
+
 const UsersContainer = connect(mapStateToProps, {
     setCurrentPage: setCurrentPageActionCreator,
     getUsers: setUsersThunkCreator,
     follow: followThunkCreator,
     unfollow: unfollowThunkCreator
-})(UsersContainerAPI);
+})(withAuthRedirectContainer);
 
 export default UsersContainer;
 

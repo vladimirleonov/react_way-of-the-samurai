@@ -131,12 +131,15 @@ export const toggleIsLoadingActionCreator = (isLoading) => {
 //thunks
 
 export const getUserProfileThunkCreator = (userId) => {
+    debugger;
     return (dispatch) => {
+        debugger;
         profileAPI.getUserProfile(userId)
             .then((data) => {
                 debugger;
                 console.log(data);
                 dispatch(setProfileInfoActionCreator(data));
+                debugger;
             })
     }
 }

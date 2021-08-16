@@ -14,7 +14,7 @@ class ProfileInfoContainerAPI extends React.Component{
         debugger;
         const userId = this.props.match.params.userId;
 
-        getUserProfileThunkCreator(userId);
+        this.props.getUserProfile(userId);
 
         //axios.get('https://social-network.samuraijs.com/api/1.0/profile/' + userId)
         /*profileAPI.getUserProfile(userId)
@@ -49,6 +49,6 @@ const mapStateToProps = (state) => {
 
 const withUrlDataProfileInfoContainer = withRouter(ProfileInfoContainerAPI)
 
-const ProfileInfoContainer = connect(mapStateToProps)(withUrlDataProfileInfoContainer);
+const ProfileInfoContainer = connect(mapStateToProps, {getUserProfile: getUserProfileThunkCreator})(withUrlDataProfileInfoContainer);
 
 export default ProfileInfoContainer;

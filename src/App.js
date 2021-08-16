@@ -3,6 +3,7 @@ import s from './App.module.css';
 
 import HeaderContainer from "./components/Header/HeaderContainer";
 import Nav from "./components/Nav/Nav";
+import Profile from "./components/Profile/Profile";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import MessagesContainer from "./components/Messages/MessagesContainer";
 import News from "./components/News/News";
