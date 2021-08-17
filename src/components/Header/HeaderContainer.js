@@ -9,6 +9,7 @@ import {setUserAuthDataActionCreator} from "../../store/auth";
 import {getUserAuthDataThunkCreator} from "../../store/auth";
 
 import {authMeAPI} from "../../api/api";
+import {compose} from "redux";
 
 class HeaderContainerAPI extends React.Component{
     componentDidMount() {
@@ -56,6 +57,12 @@ const mapStateToProps = (state) => {
     }
 }*/
 
-const HeaderContainer = connect(mapStateToProps, {getUserAuthData: getUserAuthDataThunkCreator})(HeaderContainerAPI);
+const HeaderContainer = compose(
+    connect(mapStateToProps, {getUserAuthData: getUserAuthDataThunkCreator})
+)(HeaderContainerAPI);
 
 export default HeaderContainer;
+
+/*const HeaderContainer = connect(mapStateToProps, {getUserAuthData: getUserAuthDataThunkCreator})(HeaderContainerAPI);
+
+export default HeaderContainer;*/

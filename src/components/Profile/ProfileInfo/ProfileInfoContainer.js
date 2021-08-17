@@ -4,11 +4,13 @@ import {getUserProfileThunkCreator, setProfileInfoActionCreator} from "../../../
 import Preloader from "../../common/Preloader";
 import * as axios from 'axios';
 import {connect} from "react-redux";
+import {compose} from 'redux';
 import { withRouter } from "react-router-dom";
 
 import {profileAPI} from "../../../api/api";
 
 
+/*class ProfileInfoContainerAPI extends React.Component{*/
 class ProfileInfoContainerAPI extends React.Component{
     componentDidMount () {
         debugger;
@@ -46,9 +48,16 @@ const mapStateToProps = (state) => {
         }
     }
 }*/
+const ProfileContainer = compose(
+    connect(mapStateToProps, {getUserProfile: getUserProfileThunkCreator}),
+    withRouter
+)(ProfileInfoContainerAPI)
 
+export default ProfileContainer;
+
+/*
 const withUrlDataProfileInfoContainer = withRouter(ProfileInfoContainerAPI)
 
 const ProfileInfoContainer = connect(mapStateToProps, {getUserProfile: getUserProfileThunkCreator})(withUrlDataProfileInfoContainer);
 
-export default ProfileInfoContainer;
+export default ProfileInfoContainer;*/
