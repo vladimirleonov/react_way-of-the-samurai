@@ -10,7 +10,7 @@ const Profile = () => {
     debugger;
     return(
         <div className={s.profile}>
-            <BigImg/>
+            {/*<BigImg/>*/}
             <ProfileInfoContainer/>
             <MyPostsContainer />
         </div>

@@ -203,7 +203,7 @@ export const unfollowThunkCreator = (userId) => {
         usersAPI.unfollow(userId)
             .then((data) => {
                 if (data.resultCode === 0) {
-                    dispatch(changeButtonConditionActionCreator(false, props.id));
+                    dispatch(changeButtonConditionActionCreator(false, userId));
                     debugger;
                     dispatch(unfollowActionCreator(userId));
                 }

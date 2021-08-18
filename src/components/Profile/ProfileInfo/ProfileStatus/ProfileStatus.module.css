@@ -1,0 +1,38 @@
+.profile__status__wrapper {
+    margin-bottom: 16px;
+}
+
+.status__text {
+    position: relative;
+    font-size: 20px;
+    line-height: 28px;
+    cursor: pointer;
+}
+
+.status__text:hover::after {
+    position: absolute;
+    left: 118px;
+    top: -14px;
+    z-index: 1;
+    font-size: 12px;
+    content: attr(data-title);
+    color: #7e7e7e;
+    width: 148px;
+}
+
+.input__wrapper {
+    display: flex;
+    align-items: center;
+    padding: 12px 16px;
+    background-color: #efefef;
+    width: 40vw;
+}
+
+.input {
+    font-size: 18px;
+    width: 100%;
+    padding: 5px 10px;
+    /*color: #7e7e7e;*/
+    outline: none;
+}
+

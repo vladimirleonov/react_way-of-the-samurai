@@ -1,6 +1,7 @@
 import React from 'react';
 import s from "./ProfileInfo.module.css";
 import ava from "./ava.png";
+import ProfileStatus from "./ProfileStatus/ProfileStatus";
 
 const ProfileInfo = (props) => {
     debugger;
@@ -11,6 +12,7 @@ const ProfileInfo = (props) => {
             </div>
             <div className={s.info}>
                 <div className={s.name}>{props.fullName}</div>
+                <ProfileStatus/>
                 {props.contacts.github ?
                     <div className={`${s.text}`}>
                         <div className={s.title}>GitHub</div>
