@@ -9,7 +9,7 @@ const Nav = () => {
                 <ul className={s.menu}>
                     <li className={s.item}>
                         {/*<NavLink exact className={s.link} activeClassName={s.active} to="/">Profile</NavLink>*/}
-                        <NavLink exact className={s.link} activeClassName={s.active} to="/profile">Profile</NavLink>
+                        <NavLink className={s.link} activeClassName={s.active} to="/profile/18381">Profile</NavLink>
                     </li>
                     <li className={s.item}>
                         <NavLink className={s.link} activeClassName={s.active} to="/messages">Messages</NavLink>

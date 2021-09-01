@@ -4,6 +4,7 @@ const ADD_POST = 'ADD-POST';
 const CHANGE_NEW_POST_TEXT = 'CHANGE-NEW-POST-TEXT';
 const SET_PROFILE_INFO = 'SET-PROFILE-INFO';
 const IS_LOADING = 'IS-LOADING';
+const UPDATE_USER_STATUS = 'UPDATE-USER-STATUS';
 
 const defaultState = {
     postData: [
@@ -11,7 +12,7 @@ const defaultState = {
         { id: 2, text: 'gjgjgh fhg', likeCount: 9},
         { id: 3, text: 'qwerty', likeCount: 11}
     ],
-    newPostValue: '',
+    /*newPostValue: '',*/
     profileInfo: {
         fullName: null,
         lookingForAJob: false,
@@ -31,7 +32,7 @@ const defaultState = {
             large: null
         }
     },
-    //isLoading: false
+    status: ''
 }
 
 const profileReducer = (state=defaultState, action) => {
@@ -40,7 +41,7 @@ const profileReducer = (state=defaultState, action) => {
             const newPost =
                 {
                     id: 4,
-                    text: state.newPostValue,
+                    text: action.newPostValue,
                     likeCount: 3
                 }
             state.newPostValue = '';
@@ -50,13 +51,13 @@ const profileReducer = (state=defaultState, action) => {
                 postData: [...state.postData, newPost]
             }
         }
-        case CHANGE_NEW_POST_TEXT: {
+        /*case CHANGE_NEW_POST_TEXT: {
             debugger;
             return {
                 ...state,
                 newPostValue: action.newPostValue
             }
-        }
+        }*/
         case SET_PROFILE_INFO: {
             debugger;
             return {
@@ -92,6 +93,13 @@ const profileReducer = (state=defaultState, action) => {
                 isLoading: action.isLoading
             }
         }*/
+        case UPDATE_USER_STATUS: {
+            debugger;
+            return {
+                ...state,
+                status: action.status
+            }
+        }
         default: {
             return state
         }
@@ -102,13 +110,16 @@ export default profileReducer;
 
 // actions
 
-export const addPostActionCreator = () => ({type: ADD_POST});
-export const changeNewPostTextActionCreator = (data) => {
+export const addPostActionCreator = (newPostValue) => ({
+    type: ADD_POST,
+    newPostValue
+});
+/*export const changeNewPostTextActionCreator = (data) => {
     return {
         type: CHANGE_NEW_POST_TEXT,
         newPostValue: data
     }
-}
+}*/
 
 export const setProfileInfoActionCreator = (profileInfo) => {
     debugger;
@@ -142,4 +153,32 @@ export const getUserProfileThunkCreator = (userId) => {
                 debugger;
             })
     }
+}
+
+export const updateUserStatusActionCreator = (status) => {
+    debugger;
+    return {
+        type: UPDATE_USER_STATUS,
+        status
+    }
+}
+
+export const updateUserStatusThunkCreator = (status) => (dispatch) => {
+    debugger;
+    profileAPI.updateUserStatus(status)
+        .then((data) => {
+            if (data.resultCode === 0) {
+                debugger;
+                dispatch(updateUserStatusActionCreator(status));
+            }
+        })
+}
+
+export const getUserStatusThunkCreator = (userId) => (dispatch) => {
+    debugger;
+    profileAPI.getUserStatus(userId)
+        .then((status) => {
+            debugger;
+            dispatch(updateUserStatusActionCreator(status));
+        })
 }

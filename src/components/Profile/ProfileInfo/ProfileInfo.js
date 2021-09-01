@@ -12,7 +12,7 @@ const ProfileInfo = (props) => {
             </div>
             <div className={s.info}>
                 <div className={s.name}>{props.fullName}</div>
-                <ProfileStatus/>
+                <ProfileStatus status={props.status} updateUserStatus={props.updateUserStatus}/>
                 {props.contacts.github ?
                     <div className={`${s.text}`}>
                         <div className={s.title}>GitHub</div>

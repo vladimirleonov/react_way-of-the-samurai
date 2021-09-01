@@ -1,6 +1,6 @@
 import React from 'react';
 import ProfileInfo from "./ProfileInfo";
-import {getUserProfileThunkCreator, setProfileInfoActionCreator} from "../../../store/profile-reducer";
+import {getUserProfileThunkCreator, updateUserStatusThunkCreator, getUserStatusThunkCreator} from "../../../store/profile-reducer";
 import Preloader from "../../common/Preloader";
 import * as axios from 'axios';
 import {connect} from "react-redux";
@@ -14,7 +14,13 @@ import {profileAPI} from "../../../api/api";
 class ProfileInfoContainerAPI extends React.Component{
     componentDidMount () {
         debugger;
-        const userId = this.props.match.params.userId;
+        let userId = this.props.match.params.userId;
+
+        /*if(!userId) {
+            userId = 18381;
+        }*/
+
+        this.props.getUserStatus(userId);
 
         this.props.getUserProfile(userId);
 
@@ -29,7 +35,7 @@ class ProfileInfoContainerAPI extends React.Component{
 
     render () {
         return (
-            <ProfileInfo {...this.props.profileInfo}/>
+            <ProfileInfo {...this.props.profileInfo} status={this.props.status} updateUserStatus={this.props.updateUserStatus}/>
         )
     }
 }
@@ -37,7 +43,8 @@ class ProfileInfoContainerAPI extends React.Component{
 const mapStateToProps = (state) => {
     return {
         profileInfo: state.profilePage.profileInfo,
-        isLoading: state.profilePage.isLoading
+        isLoading: state.profilePage.isLoading,
+        status: state.profilePage.status
     }
 }
 
@@ -49,7 +56,12 @@ const mapStateToProps = (state) => {
     }
 }*/
 const ProfileContainer = compose(
-    connect(mapStateToProps, {getUserProfile: getUserProfileThunkCreator}),
+    connect(mapStateToProps,
+        {
+            getUserProfile: getUserProfileThunkCreator,
+            updateUserStatus: updateUserStatusThunkCreator,
+            getUserStatus: getUserStatusThunkCreator
+        }),
     withRouter
 )(ProfileInfoContainerAPI)
 

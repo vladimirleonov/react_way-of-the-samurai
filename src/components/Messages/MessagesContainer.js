@@ -1,5 +1,5 @@
 import React from 'react';
-import {addMessageActionCreator, changeNewMessageTextActionCreator} from "../../store/messages-reducer";
+import {addMessageActionCreator} from "../../store/messages-reducer";
 import Messages from "./Messages";
 import withAuthRedirect from '../../hoc/withAuthRedirect';
 
@@ -12,20 +12,22 @@ const mapStateToProps = (state) => {
     }
 }
 
-const mapDispatchToProps = (dispatch) => {
+/*const mapDispatchToProps = (dispatch) => {
     return {
         onAddMessage() {
             dispatch(addMessageActionCreator());
         },
-        onChangeNewMessageValue(text) {
+        /!*onChangeNewMessageValue(text) {
             dispatch(changeNewMessageTextActionCreator(text));
-        }
+        }*!/
     }
-}
+}*/
 
 const withAuthRedirectContainer = withAuthRedirect(Messages);
 
-const MessagesContainer = connect(mapStateToProps, mapDispatchToProps)(withAuthRedirectContainer);
+const MessagesContainer = connect(mapStateToProps, {
+    onAddMessage: addMessageActionCreator
+})(withAuthRedirectContainer);
 
 export default MessagesContainer;
 

@@ -4,6 +4,7 @@ import s from './Messages.module.css';
 
 import DialogItem from "./DialogItem/DialogItem";
 import MessageItem from "./MessageItem/MessageItem";
+import NewMessageForm from "./NewMessageForm/NewMessageForm";
 
 
 const Messages = (props) => {
@@ -16,14 +17,12 @@ const Messages = (props) => {
         return <MessageItem userName={item.userName} message={item.message}/>;
     })
 
-    const textInputRef = React.createRef();
-
-    function onAddMessage() {
-        props.onAddMessage();
-    }
-
-    function onChangeNewMessageValue () {
-        props.onChangeNewMessageValue(textInputRef.current.value);
+    function onSubmit(values) {
+        const { newMessageValue } = values;
+        if (newMessageValue) {
+            console.log(newMessageValue);
+            props.onAddMessage(newMessageValue);
+        }
     }
 
     return (
@@ -36,15 +35,7 @@ const Messages = (props) => {
                     {newMessages}
                 </div>
                 <div className={s.newMessage}>
-                    <form action="#">
-                        <input ref={textInputRef}
-                               onChange={onChangeNewMessageValue}
-                               type="text"
-                               value={props.messagesState.newMessageValue}/>
-                        <button onClick={onAddMessage} type='button'>
-                            Send
-                        </button>
-                    </form>
+                    <NewMessageForm onSubmit={onSubmit}/>
                 </div>
             </div>
         </div>

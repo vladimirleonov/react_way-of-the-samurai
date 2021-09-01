@@ -6,6 +6,7 @@ class ProfileStatus extends React.Component {
         super(props);
 
         this.state = {
+            status: this.props.status,
             editMode: false
         }
 
@@ -13,39 +14,59 @@ class ProfileStatus extends React.Component {
 
         this.enableEditMode = this.enableEditMode.bind(this);
         this.disableEditMode = this.disableEditMode.bind(this);
+        this.onChangeStatus = this.onChangeStatus.bind(this);
     }
 
-    enableEditMode () {
+    enableEditMode() {
         this.setState({
             editMode: true
         })
     }
 
-    disableEditMode () {
+    disableEditMode() {
         this.setState({
             editMode: false
         })
+        debugger;
+        this.props.updateUserStatus(this.state.status);
+        debugger;
+    }
+
+
+    onChangeStatus(e) {
+        this.setState({
+            status: e.currentTarget.value
+        });
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        debugger;
+        if(prevProps.status != this.props.status) {
+            this.setState({
+                status: this.props.status
+            })
+        }
+        debugger;
     }
 
     render() {
         return (
             <div className={s.profile__status__wrapper}>
                 {!this.state.editMode &&
-                    <span className={s.status__text} data-title={'double click here to change'}
-                    onDoubleClick={this.enableEditMode} ref={this.inputValueRef}>
-                        Hello world!!!
-                    </span>
+                <span className={s.status__text} data-title={'double click here to change'}
+                      onDoubleClick={this.enableEditMode} ref={this.inputValueRef}>
+                    {this.props.status}
+                </span>
                 }
                 {this.state.editMode &&
-                    <div className={s.input__wrapper} onMouseOut={this.disableEditMode}>
-                        <input className={s.input} value={this.inputValueRef.current.value} />
-                    </div>
+                <div className={s.input__wrapper}>
+                    <input className={s.input} onChange={this.onChangeStatus} autoFocus={true} onBlur={this.disableEditMode} value={this.state.status}/>
+                </div>
                 }
 
             </div>
         )
     }
-
 }
 
 export default ProfileStatus;

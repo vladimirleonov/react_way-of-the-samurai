@@ -38,6 +38,17 @@ export const profileAPI = {
                 debugger;
                 return response.data;
             })
+    },
+    getUserStatus (userId) {
+        return instance.get(`profile/status/${userId}`)
+            .then(response => response.data)
+    },
+    updateUserStatus (status) {
+        debugger;
+        return instance.put(`profile/status`, {
+            status
+        }).then(response => response.data
+        )
     }
 }
 

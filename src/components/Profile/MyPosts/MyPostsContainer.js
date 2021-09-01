@@ -1,7 +1,7 @@
 import React from 'react';
 import MyPosts from "./MyPosts";
 
-import {addPostActionCreator, changeNewPostTextActionCreator} from "../../../store/profile-reducer";
+import {addPostActionCreator} from "../../../store/profile-reducer";
 
 import {connect} from "react-redux";
 
@@ -39,19 +39,21 @@ const mapStateToProps = (state) => {
     }
 }
 
-const mapDispatchToProps = (dispatch) => {
+/*const mapDispatchToProps = (dispatch) => {
     return {
         onAddPost() {
             debugger;
             dispatch(addPostActionCreator());
-        },
-        onChangeTextareaValue(text) {
+        }
+        /!*onChangeTextareaValue(text) {
             debugger;
             dispatch(changeNewPostTextActionCreator(text));
-        }
+        }*!/
     }
-}
+}*/
 
-const MyPostsContainer = connect(mapStateToProps, mapDispatchToProps)(MyPosts);
+const MyPostsContainer = connect(mapStateToProps, {
+    onAddPost: addPostActionCreator
+})(MyPosts);
 
 export default MyPostsContainer;
