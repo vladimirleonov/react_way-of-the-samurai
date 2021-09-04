@@ -1,10 +1,10 @@
-.new__post {
+.newPostForm {
     margin: 15px 0 20px 0;
     /*width: 725px;*/
     width: 54vw;
     margin-right: 0;
 }
-.new__post textarea {
+.textarea {
     display: block;
     width: 100%;
     min-height: 70px;
@@ -12,7 +12,7 @@
     font-size: 18px;
     /* color: #b2b2b2; */
 }
-.new__post button {
+.btn {
     width: 120px;
     height: 38px;
     font-size: 16px;
@@ -25,3 +25,7 @@
     color: #ffffff;
     border: 0;
 }
+.btn[disabled] {
+    background-color: rgba(228, 77, 58, 0.75);
+}
+

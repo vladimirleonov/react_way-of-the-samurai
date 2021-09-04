@@ -29,3 +29,7 @@
     display: block;
     margin: 10px 20% 0 auto;
 }
+
+.btn[disabled] {
+    background-color: rgba(228, 77, 58, 0.75);
+}

@@ -6,7 +6,7 @@ import { Field, reduxForm } from "redux-form";
 
 const NewMessageForm = (props) => {
 
-    const { handleSubmit } = props;
+    const { handleSubmit, pristine, submitting } = props;
 
     return (
         <form onSubmit={handleSubmit} className={s.newMessageForm}>
@@ -17,7 +17,11 @@ const NewMessageForm = (props) => {
                 type="text"
                 rows='3'
             />
-            <button className={s.btn} type='submit'>
+            <button
+                disabled={pristine || submitting}
+                className={s.btn}
+                type='submit'
+            >
                 Send
             </button>
         </form>

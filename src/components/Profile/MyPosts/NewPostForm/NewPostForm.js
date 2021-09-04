@@ -6,10 +6,10 @@ import { Field, reduxForm } from "redux-form";
 
 const NewPostForm = (props) => {
 
-    const { handleSubmit } = props;
+    const { handleSubmit, pristine, submitting } = props;
 
     return (
-        <form onSubmit={handleSubmit} className={s.new__post}>
+        <form onSubmit={handleSubmit} className={s.newPostForm}>
             <Field
                 name="newPostValue"
                 component='textarea'
@@ -17,7 +17,13 @@ const NewPostForm = (props) => {
                 id="33"
                 rows="3"
             />
-            <button className={s.btn} type="submit">Send</button>
+            <button
+            disabled={submitting || pristine}
+                className={s.btn}
+                type="submit"
+            >
+                Send
+            </button>
         </form>
     )
 }

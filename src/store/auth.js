@@ -18,7 +18,7 @@ const authReducer = (state = initialState, action) => {
                 id: action.id,
                 email: action.email,
                 login: action.login,
-                isAuth: true
+                isAuth: action.isAuth
             }
         }
         default: {
@@ -28,12 +28,13 @@ const authReducer = (state = initialState, action) => {
     }
 }
 
-export const setUserAuthDataActionCreator = (id, email, login) => {
+export const setUserAuthDataActionCreator = (id, email, login, isAuth = false) => {
     return {
         type: SET_USER_AUTH_DATA,
         id,
         email,
-        login
+        login,
+        isAuth
     }
 }
 
@@ -46,8 +47,32 @@ export const getUserAuthDataThunkCreator = () => {
                     debugger;
                     const {id, email, login} = data.data;
                     debugger;
-                    dispatch(setUserAuthDataActionCreator(id, email, login));
+                    dispatch(setUserAuthDataActionCreator(id, email, login, true));
                     debugger;
+                }
+            })
+    }
+}
+
+export const logoutThunkCreator = () => {
+    return (dispatch) => {
+        authMeAPI.logout()
+            .then((data) => {
+                if (data.resultCode === 0) {
+                    alert('loged out');
+                    dispatch(setUserAuthDataActionCreator(null, null, null, false));
+                }
+            })
+    }
+}
+
+export const loginThunkCreator = (email, password, rememberMe) => {
+    return (dispatch) => {
+        authMeAPI.login (email, password, rememberMe)
+            .then((data) => {
+                if(data.resultCode === 0) {
+                    alert('loged in');
+                    dispatch(getUserAuthDataThunkCreator());
                 }
             })
     }
