@@ -4,7 +4,7 @@ import s from './Login.module.css';
 
 import LoginForm from './LoginForm/LoginForm';
 import {connect} from "react-redux";
-import {loginThunkCreator} from "../../store/auth";
+import {loginThunkCreator} from "../../store/auth-reducer";
 import {Redirect} from "react-router-dom";
 
 class Login extends React.Component {

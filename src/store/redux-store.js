@@ -3,7 +3,7 @@ import thunkMiddleware from 'redux-thunk';
 import profileReducer from "./profile-reducer";
 import messagesReducer from "./messages-reducer";
 import usersReducer from './users-reducer';
-import authReducer from "./auth";
+import authReducer from "./auth-reducer";
 import { reducer as formReducer } from 'redux-form';
 
 const reducers = combineReducers(

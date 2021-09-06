@@ -4,9 +4,9 @@ import Header from './Header';
 import {connect} from "react-redux";
 
 import * as axios from 'axios';
-import {logoutThunkCreator, setUserAuthDataActionCreator} from "../../store/auth";
+import {logoutThunkCreator, setUserAuthDataActionCreator} from "../../store/auth-reducer";
 
-import {getUserAuthDataThunkCreator} from "../../store/auth";
+import {getUserAuthDataThunkCreator} from "../../store/auth-reducer";
 
 import {authMeAPI} from "../../api/api";
 import {compose} from "redux";

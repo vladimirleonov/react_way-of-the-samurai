@@ -1,4 +1,6 @@
 import {authMeAPI} from "../api/api";
+import {stopSubmit} from "redux-form";
+import actions from "redux-form/lib/actions";
 
 const SET_USER_AUTH_DATA = 'SET-USER-AUTH-DATA';
 
@@ -70,9 +72,13 @@ export const loginThunkCreator = (email, password, rememberMe) => {
     return (dispatch) => {
         authMeAPI.login (email, password, rememberMe)
             .then((data) => {
+                debugger;
                 if(data.resultCode === 0) {
+                    debugger;
                     alert('loged in');
                     dispatch(getUserAuthDataThunkCreator());
+                } else {
+                    dispatch(stopSubmit('login', {_error: data.messages[0]}))
                 }
             })
     }

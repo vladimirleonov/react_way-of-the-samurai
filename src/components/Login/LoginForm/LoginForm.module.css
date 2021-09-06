@@ -16,6 +16,11 @@
     margin: 2px 0 0 5px;
     color: #700;
 }
+.common__error {
+    display: block;
+    margin: 2px 0 0 5px;
+    color: #700;
+}
 .input {
     width: 100%;
     height: 40px;

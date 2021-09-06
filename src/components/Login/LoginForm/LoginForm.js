@@ -83,6 +83,9 @@ const LoginForm = (props) => {
                 />
                 <span className='RememberMe'>Remember me</span>
             </div>
+            <div className={s.common__error}>
+                {props.error}
+            </div>
             <div className={s.btns__wrapper}>
                 <div className={s.buttonField}>
                     <button

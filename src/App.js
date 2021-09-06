@@ -2,7 +2,8 @@ import logo from './logo.svg';
 import s from './App.module.css';
 
 import HeaderContainer from "./components/Header/HeaderContainer";
-import Nav from "./components/Nav/Nav";
+/*import Nav from "./components/Nav/Nav";*/
+import NavContainer from "./components/Nav/NavContainer";
 import Profile from "./components/Profile/Profile";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import MessagesContainer from "./components/Messages/MessagesContainer";
@@ -21,7 +22,7 @@ function App() {
   return (
     <div className={s.app}>
       <HeaderContainer/>
-      <Nav/>
+      <NavContainer/>
         <div className={s.content}>
             {/*<Route exact path='/'><Profile /></Route>*/}
             <Route path='/profile/:userId'><ProfileContainer /></Route>

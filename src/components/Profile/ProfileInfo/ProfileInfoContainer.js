@@ -16,9 +16,10 @@ class ProfileInfoContainerAPI extends React.Component{
         debugger;
         let userId = this.props.match.params.userId;
 
-        /*if(!userId) {
-            userId = 18381;
-        }*/
+        if(!userId) {
+            debugger;
+            userId = this.props.myId;
+        }
 
         this.props.getUserStatus(userId);
 
@@ -44,7 +45,8 @@ const mapStateToProps = (state) => {
     return {
         profileInfo: state.profilePage.profileInfo,
         isLoading: state.profilePage.isLoading,
-        status: state.profilePage.status
+        status: state.profilePage.status,
+        myId: state.auth.id
     }
 }
 
