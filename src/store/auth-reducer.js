@@ -41,8 +41,9 @@ export const setUserAuthDataActionCreator = (id, email, login, isAuth = false) =
 }
 
 export const getUserAuthDataThunkCreator = () => {
+    debugger;
     return (dispatch) => {
-        authMeAPI.getAuthData()
+        return authMeAPI.getAuthData()
             .then((data) => {
                 debugger;
                 if(data.resultCode === 0) {

@@ -20,9 +20,9 @@ class ProfileInfoContainerAPI extends React.Component{
             debugger;
             userId = this.props.myId;
         }
-
+        debugger;
         this.props.getUserStatus(userId);
-
+        debugger;
         this.props.getUserProfile(userId);
 
         //axios.get('https://social-network.samuraijs.com/api/1.0/profile/' + userId)

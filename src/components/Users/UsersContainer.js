@@ -68,8 +68,7 @@ const UsersContainer =  compose(
         getUsers: setUsersThunkCreator,
         follow: followThunkCreator,
         unfollow: unfollowThunkCreator
-    }),
-    withAuthRedirect
+    })
 )(UsersContainerAPI);
 
 export default UsersContainer;

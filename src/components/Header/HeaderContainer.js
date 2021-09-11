@@ -12,14 +12,14 @@ import {authMeAPI} from "../../api/api";
 import {compose} from "redux";
 
 class HeaderContainerAPI extends React.Component{
-    componentDidMount() {
+    /*componentDidMount() {
         debugger;
-        /*axios.get(`https://social-network.samuraijs.com/api/1.0/auth/me`,
+        /!*axios.get(`https://social-network.samuraijs.com/api/1.0/auth/me`,
             {
                 withCredentials: true
-            })*/
+            })*!/
         this.props.getUserAuthData();
-        /*authMeAPI.getAuthData()
+        /!*authMeAPI.getAuthData()
             .then((data) => {
                 debugger;
                 if(data.resultCode === 0) {
@@ -29,8 +29,8 @@ class HeaderContainerAPI extends React.Component{
                     this.props.setUserAuthData(id, email, login);
                     debugger;
                 }
-            })*/
-    }
+            })*!/
+    }*/
 
     render () {
         debugger;

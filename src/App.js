@@ -1,9 +1,8 @@
-import logo from './logo.svg';
+import React from 'react';
 import s from './App.module.css';
 
 import HeaderContainer from "./components/Header/HeaderContainer";
-/*import Nav from "./components/Nav/Nav";*/
-import NavContainer from "./components/Nav/NavContainer";
+import Nav from "./components/Nav/Nav";
 import Profile from "./components/Profile/Profile";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import MessagesContainer from "./components/Messages/MessagesContainer";
@@ -14,27 +13,53 @@ import Users from "./components/Users/Users";
 import Settings from "./components/Settings/Settings";
 import Login from "./components/Login/Login";
 
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import {BrowserRouter as Router, Route, Link, withRouter} from "react-router-dom";
 
 import StoreContext from "./StoreContext";
+import {compose} from "redux";
+import {connect} from "react-redux";
+import Preloader from "./components/common/Preloader";
+import {initializeAppThunkCreator} from "./store/app-reducer";
 
-function App() {
-  return (
-    <div className={s.app}>
-      <HeaderContainer/>
-      <NavContainer/>
-        <div className={s.content}>
-            {/*<Route exact path='/'><Profile /></Route>*/}
-            <Route path='/profile/:userId'><ProfileContainer /></Route>
-            <Route path='/messages'><MessagesContainer /></Route>
-            <Route path='/news'> <News/> </Route>
-            <Route path='/music'> <Music/> </Route>
-            <Route path='/users'> <UsersContainer/> </Route>
-            <Route path='/settings'> <Settings/> </Route>
-            <Route path='/login'> <Login/> </Route>
-        </div>
-    </div>
-  );
+class App extends React.Component {
+    componentDidMount() {
+        this.props.initializeAppThunkCreator();
+    }
+
+    render () {
+        return (
+            <>
+            {
+                !this.props.isInitialized ? <Preloader/> :
+                    <div className={s.app}>
+                        <HeaderContainer/>
+                        <Nav/>
+                        <div className={s.content}>
+                            {/*<Route exact path='/'><Profile /></Route>*/}
+                            <Route path='/profile/:userId?'><ProfileContainer /></Route>
+                            <Route path='/messages'><MessagesContainer /></Route>
+                            <Route path='/news'> <News/> </Route>
+                            <Route path='/music'> <Music/> </Route>
+                            <Route path='/users'> <UsersContainer/> </Route>
+                            <Route path='/settings'> <Settings/> </Route>
+                            <Route path='/login'> <Login/> </Route>
+                        </div>
+                    </div>
+            }
+            </>
+        );
+    }
 }
 
-export default App;
+const mapStateToProps = (state) => {
+    return {
+        isInitialized: state.app.isInitialized
+    }
+}
+
+export default compose(
+    withRouter,
+    connect(mapStateToProps, {
+        initializeAppThunkCreator
+    })
+)(App);
