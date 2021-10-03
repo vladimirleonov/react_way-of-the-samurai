@@ -6,30 +6,44 @@ const ProfileStatusWithHooks = (props) => {
     let [status, setStatus] = useState(props.status);
     let [editMode, setEditMode] = useState(false);
 
-    const onChangeStatus = (e) => {
+
+    const activateEditMode = () => {
+        setEditMode(true);
+    }
+
+    const deactivateEditMode = () => {
+        setEditMode(false);
+        if(props.status != status) {
+            // console.log('update status');
+            props.updateUserStatus(status);
+        }
+    }
+
+    const changeStatus = (e) => {
         setStatus(e.currentTarget.value);
     }
 
     useEffect(() => {
-        if(editMode === false) {
-            console.log('update user status');
-            console.log(props.status);
-            console.log(status);
-        }
-    }, [editMode])
+        setStatus(props.status);
+        // console.log('new status has come');
+    }, [props.status])
 
     return (
         <div className={s.profile__status__wrapper}>
             {!editMode &&
                 <span className={s.status__text}
                     data-title={'double click here to change'}
-                    onDoubleClick={() => {setEditMode(true)}}>
+                    onDoubleClick={activateEditMode}>
                     {props.status}
                 </span>
             }
             {editMode &&
-                <div className={s.input__wrapper} onBlur={() => {setEditMode(false)}}>
-                    <input className={s.input} value={status} autoFocus={true} onChange={onChangeStatus}/>
+                <div className={s.input__wrapper}>
+                    <input className={s.input}
+                           value={status}
+                           onChange={changeStatus}
+                           autoFocus={true}
+                           onBlur={deactivateEditMode}/>
                 </div>
             }
         </div>
