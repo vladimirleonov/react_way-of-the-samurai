@@ -4,7 +4,6 @@ import Post from './Post/Post';
 import NewPostForm from "./NewPostForm/NewPostForm";
 
 const MyPosts = (props) => {
-    debugger;
     const newPostData = props.postData.map((item) => {
         return <Post key={item.id} text={item.text} likeCount={item.likeCount}/>
     })
@@ -12,7 +11,6 @@ const MyPosts = (props) => {
     const onSubmit = (values) => {
         const { newPostValue } = values;
         if(newPostValue) {
-            console.log(newPostValue);
             props.onAddPost(newPostValue);
         }
     }

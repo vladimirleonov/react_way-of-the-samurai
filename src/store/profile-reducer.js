@@ -32,7 +32,7 @@ const defaultState = {
             large: null
         }
     },
-    status: ''
+    status: 'empty'
 }
 
 const profileReducer = (state=defaultState, action) => {
@@ -142,7 +142,6 @@ export const getUserProfileThunkCreator = (userId) => {
     return (dispatch) => {
         profileAPI.getUserProfile(userId)
             .then((data) => {
-                console.log(data);
                 dispatch(setProfileInfoActionCreator(data));
             })
     }
@@ -165,7 +164,6 @@ export const updateUserStatusThunkCreator = (status) => (dispatch) => {
 }
 
 export const getUserStatusThunkCreator = (userId) => (dispatch) => {
-    debugger;
     profileAPI.getUserStatus(userId)
         .then((status) => {
             dispatch(updateUserStatusActionCreator(status));

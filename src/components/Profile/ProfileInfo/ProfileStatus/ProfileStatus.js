@@ -27,9 +27,7 @@ class ProfileStatus extends React.Component {
         this.setState({
             editMode: false
         })
-        debugger;
         this.props.updateUserStatus(this.state.status);
-        debugger;
     }
 
 
@@ -40,13 +38,11 @@ class ProfileStatus extends React.Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
-        debugger;
         if(prevProps.status != this.props.status) {
             this.setState({
                 status: this.props.status
             })
         }
-        debugger;
     }
 
     render() {

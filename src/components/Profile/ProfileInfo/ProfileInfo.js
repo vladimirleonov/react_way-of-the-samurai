@@ -2,9 +2,9 @@ import React from 'react';
 import s from "./ProfileInfo.module.css";
 import ava from "./ava.png";
 import ProfileStatus from "./ProfileStatus/ProfileStatus";
+import ProfileStatusWithHooks from "./ProfileStatus/ProfileStatusWithHooks";
 
 const ProfileInfo = (props) => {
-    debugger;
     return (
         <div className={s.info__wrapper}>
             <div className={s.ava}>
@@ -12,7 +12,7 @@ const ProfileInfo = (props) => {
             </div>
             <div className={s.info}>
                 <div className={s.name}>{props.fullName}</div>
-                <ProfileStatus status={props.status} updateUserStatus={props.updateUserStatus}/>
+                <ProfileStatusWithHooks status={props.status} updateUserStatus={props.updateUserStatus}/>
                 {props.contacts.github ?
                     <div className={`${s.text}`}>
                         <div className={s.title}>GitHub</div>

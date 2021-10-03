@@ -27,23 +27,7 @@ class ProfileContainer extends React.Component {
         }
         this.props.getUserStatus(userId);
         this.props.getUserProfile(userId);
-
-        //axios.get('https://social-network.samuraijs.com/api/1.0/profile/' + userId)
-        /*profileAPI.getUserProfile(userId)
-            .then((data) => {
-                debugger;
-                console.log(data);
-                this.props.setProfileInfo(data);
-            })*/
     }
-/*    componentDidUpdate(prevProps, prevState, snapshot) {
-        debugger;
-        console.log(this.props.myId);
-        debugger;
-        this.props.getUserStatus(this.props.myId);
-        debugger;
-        this.props.getUserProfile(this.props.myId);
-    }*/
 
     render() {
         return (
