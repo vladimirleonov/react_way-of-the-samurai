@@ -30,10 +30,8 @@ export const initializeAppActionCreator = () => {
 
 export const initializeAppThunkCreator = () => (dispatch) => {
     const promise = dispatch(getUserAuthDataThunkCreator());
-    debugger;
     Promise.all([promise])
         .then(() => {
-            debugger;
             dispatch(initializeAppActionCreator());
         })
 }

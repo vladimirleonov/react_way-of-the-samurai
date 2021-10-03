@@ -10,7 +10,6 @@ const withAuthRedirect = (Component) => {
             isAuth: state.auth.isAuth
         }
     }
-    debugger;
     const RedirectComponent = (props) => {
         if(!props.isAuth) {
             return <Redirect to='/login'/>

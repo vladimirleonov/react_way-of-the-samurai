@@ -4,32 +4,29 @@ import Messages from "./Messages";
 import withAuthRedirect from '../../hoc/withAuthRedirect';
 
 import {connect} from "react-redux";
+import {getMessagesPage} from "../../store/messages-selector";
+import {compose} from "redux";
 
 const mapStateToProps = (state) => {
     return {
-        messagesState: state.messagesPage,
-        isAuth: state.auth.isAuth
+        messagesState: getMessagesPage(state),
     }
 }
 
-/*const mapDispatchToProps = (dispatch) => {
-    return {
-        onAddMessage() {
-            dispatch(addMessageActionCreator());
-        },
-        /!*onChangeNewMessageValue(text) {
-            dispatch(changeNewMessageTextActionCreator(text));
-        }*!/
-    }
-}*/
-
-const withAuthRedirectContainer = withAuthRedirect(Messages);
+/*const withAuthRedirectContainer = withAuthRedirect(Messages);
 
 const MessagesContainer = connect(mapStateToProps, {
     onAddMessage: addMessageActionCreator
 })(withAuthRedirectContainer);
 
-export default MessagesContainer;
+export default MessagesContainer;*/
+
+export default compose(
+    withAuthRedirect,
+    connect(mapStateToProps, {
+        onAddMessage: addMessageActionCreator
+    })
+)(Messages);
 
 
 

@@ -10,13 +10,13 @@ import {
     updateUserStatusThunkCreator
 } from "../../store/profile-reducer";
 import {withRouter} from "react-router-dom";
+import {getNewPostValue, getPostData, getProfileInfo, getStatus} from "../../store/profile-selector";
+import {getId} from "../../store/auth-selector";
 
-debugger;
+
 
 class ProfileContainer extends React.Component {
-    debugger;
     componentDidMount() {
-        debugger;
         let userId = this.props.match.params.userId;
 
         if(!userId) {
@@ -25,9 +25,7 @@ class ProfileContainer extends React.Component {
                 this.props.history.push('./login');
             }
         }
-        debugger;
         this.props.getUserStatus(userId);
-        debugger;
         this.props.getUserProfile(userId);
 
         //axios.get('https://social-network.samuraijs.com/api/1.0/profile/' + userId)
@@ -63,12 +61,11 @@ class ProfileContainer extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        profileInfo: state.profilePage.profileInfo,
-        status: state.profilePage.status,
-        myId: state.auth.id,
-
-        postData: state.profilePage.postData,
-        newPostValue: state.profilePage.newPostValue
+        profileInfo: getProfileInfo(state),
+        status: getStatus(state),
+        myId: getId(state),
+        postData: getPostData(state),
+        newPostValue: getNewPostValue(state)
     }
 }
 

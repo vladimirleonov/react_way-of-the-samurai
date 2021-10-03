@@ -23,8 +23,10 @@ const initialState = {
 
 const usersReducer = (state=initialState, action) => {
     switch (action.type) {
+/*        case 'FAKE': {
+            return {...state}
+        }*/
         case FOLLOW: {
-            debugger;
             return {
                 ...state,
                 users: state.users.map(u =>
@@ -42,7 +44,6 @@ const usersReducer = (state=initialState, action) => {
             }
         }
         case UNFOLLOW: {
-            debugger;
             return {
                 ...state,
                 users: state.users.map (u => {
@@ -58,35 +59,30 @@ const usersReducer = (state=initialState, action) => {
             }
         }
         case SET_USERS: {
-            debugger;
             return {
                 ...state,
                 users: [...action.users]
             }
         }
         case SET_CURRENT_PAGE: {
-            debugger;
             return {
                 ...state,
                 currentPage: action.currentPage
             }
         }
         case SET_TOTAL_USERS_COUNT: {
-            debugger;
             return {
                 ...state,
                 totalUsersCount: action.totalUsersCount
             }
         }
         case IS_LOADING: {
-            debugger;
             return {
                 ...state,
                 isLoading: action.isLoading
             }
         }
         case CHANGE_BUTTON_CONDITION: {
-            debugger;
             return {
                 ...state,
                 arrayUsersWithDisabledId:
@@ -104,7 +100,6 @@ const usersReducer = (state=initialState, action) => {
 //actions
 
 export const followActionCreator = (userId) => {
-    debugger;
     return {
         type: FOLLOW,
         userId: userId
@@ -112,7 +107,6 @@ export const followActionCreator = (userId) => {
 }
 
 export const unfollowActionCreator = (userId) => {
-    debugger;
     return {
         type: UNFOLLOW,
         userId: userId
@@ -120,7 +114,6 @@ export const unfollowActionCreator = (userId) => {
 }
 
 export const setUsersActionCreator = (users) => {
-    debugger;
     return {
         type: SET_USERS,
         users: users
@@ -128,7 +121,6 @@ export const setUsersActionCreator = (users) => {
 }
 
 export const setCurrentPageActionCreator = (currentPage) => {
-    debugger;
     return {
         type: SET_CURRENT_PAGE,
         currentPage: currentPage
@@ -136,7 +128,6 @@ export const setCurrentPageActionCreator = (currentPage) => {
 }
 
 export const setTotalUsersCountActionCreator = (totalUsersCount) => {
-    debugger;
     return {
         type: SET_TOTAL_USERS_COUNT,
         totalUsersCount: totalUsersCount
@@ -144,7 +135,6 @@ export const setTotalUsersCountActionCreator = (totalUsersCount) => {
 }
 
 export const toggleIsLoadingActionCreator = (value) => {
-    debugger;
     return {
         type: IS_LOADING,
         isLoading: value
@@ -152,7 +142,6 @@ export const toggleIsLoadingActionCreator = (value) => {
 }
 
 export const changeButtonConditionActionCreator = (isChangingBtnCondition, userId) => {
-    debugger;
     return {
         type: CHANGE_BUTTON_CONDITION,
         isChangingBtnCondition,
@@ -165,18 +154,11 @@ export const changeButtonConditionActionCreator = (isChangingBtnCondition, userI
 export const setUsersThunkCreator = (currentPage, pageSize) => {
     return (dispatch) => {
         dispatch(toggleIsLoadingActionCreator(true));
-
-        //axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
         usersAPI.getUsers(currentPage, pageSize)
             .then((data) => {
-                debugger;
-                console.log(data);
-
                 dispatch(toggleIsLoadingActionCreator(false));
-                debugger;
                 dispatch(setUsersActionCreator(data.items));
                 dispatch(setTotalUsersCountActionCreator(data.totalCount));
-                debugger;
             })
     }
 }
@@ -186,11 +168,8 @@ export const followThunkCreator = (userId) => {
         dispatch(changeButtonConditionActionCreator(true, userId));
         usersAPI.follow(userId)
             .then((data) => {
-                debugger;
                 if (data.resultCode === 0) {
-                    debugger;
                     dispatch(changeButtonConditionActionCreator(false, userId));
-                    debugger;
                     dispatch(followActionCreator(userId));
                 }
             })
@@ -204,7 +183,6 @@ export const unfollowThunkCreator = (userId) => {
             .then((data) => {
                 if (data.resultCode === 0) {
                     dispatch(changeButtonConditionActionCreator(false, userId));
-                    debugger;
                     dispatch(unfollowActionCreator(userId));
                 }
             })

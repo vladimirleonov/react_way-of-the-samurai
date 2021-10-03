@@ -3,23 +3,21 @@ import s from './App.module.css';
 
 import HeaderContainer from "./components/Header/HeaderContainer";
 import Nav from "./components/Nav/Nav";
-import Profile from "./components/Profile/Profile";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import MessagesContainer from "./components/Messages/MessagesContainer";
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import UsersContainer from "./components/Users/UsersContainer";
-import Users from "./components/Users/Users";
 import Settings from "./components/Settings/Settings";
-import Login from "./components/Login/Login";
+import LoginContainer from "./components/Login/LoginContainer";
 
-import {BrowserRouter as Router, Route, Link, withRouter} from "react-router-dom";
+import {Route, withRouter} from "react-router-dom";
 
-import StoreContext from "./StoreContext";
 import {compose} from "redux";
 import {connect} from "react-redux";
 import Preloader from "./components/common/Preloader";
 import {initializeAppThunkCreator} from "./store/app-reducer";
+import {getIsInitialized} from "./store/app-selector";
 
 class App extends React.Component {
     componentDidMount() {
@@ -42,7 +40,7 @@ class App extends React.Component {
                             <Route path='/music'> <Music/> </Route>
                             <Route path='/users'> <UsersContainer/> </Route>
                             <Route path='/settings'> <Settings/> </Route>
-                            <Route path='/login'> <Login/> </Route>
+                            <Route path='/login'> <LoginContainer/> </Route>
                         </div>
                     </div>
             }
@@ -53,7 +51,7 @@ class App extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        isInitialized: state.app.isInitialized
+        isInitialized: getIsInitialized(state)
     }
 }
 

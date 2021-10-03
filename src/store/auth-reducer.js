@@ -1,6 +1,5 @@
 import {authMeAPI} from "../api/api";
 import {stopSubmit} from "redux-form";
-import actions from "redux-form/lib/actions";
 
 const SET_USER_AUTH_DATA = 'SET-USER-AUTH-DATA';
 
@@ -14,7 +13,6 @@ const initialState = {
 const authReducer = (state = initialState, action) => {
     switch (action.type) {
         case SET_USER_AUTH_DATA: {
-            //debugger;
             return {
                 ...state,
                 id: action.id,
@@ -24,7 +22,6 @@ const authReducer = (state = initialState, action) => {
             }
         }
         default: {
-            //debugger;
             return state
         }
     }
@@ -41,17 +38,12 @@ export const setUserAuthDataActionCreator = (id, email, login, isAuth = false) =
 }
 
 export const getUserAuthDataThunkCreator = () => {
-    debugger;
     return (dispatch) => {
         return authMeAPI.getAuthData()
             .then((data) => {
-                debugger;
                 if(data.resultCode === 0) {
-                    debugger;
                     const {id, email, login} = data.data;
-                    debugger;
                     dispatch(setUserAuthDataActionCreator(id, email, login, true));
-                    debugger;
                 }
             })
     }
@@ -73,9 +65,7 @@ export const loginThunkCreator = (email, password, rememberMe) => {
     return (dispatch) => {
         authMeAPI.login (email, password, rememberMe)
             .then((data) => {
-                debugger;
                 if(data.resultCode === 0) {
-                    debugger;
                     alert('loged in');
                     dispatch(getUserAuthDataThunkCreator());
                 } else {

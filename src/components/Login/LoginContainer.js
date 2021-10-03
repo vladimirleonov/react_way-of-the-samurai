@@ -6,8 +6,9 @@ import LoginForm from './LoginForm/LoginForm';
 import {connect} from "react-redux";
 import {loginThunkCreator} from "../../store/auth-reducer";
 import {Redirect} from "react-router-dom";
+import {getIsAuth} from "../../store/auth-selector";
 
-class Login extends React.Component {
+class LoginContainer extends React.Component {
 
     constructor(props) {
         super(props);
@@ -33,10 +34,10 @@ class Login extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        isAuth: state.auth.isAuth
+        isAuth: getIsAuth(state)
     }
 }
 
 export default connect(mapStateToProps,{
     login: loginThunkCreator
-})(Login);
+})(LoginContainer);

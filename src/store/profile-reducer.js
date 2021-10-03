@@ -59,7 +59,6 @@ const profileReducer = (state=defaultState, action) => {
             }
         }*/
         case SET_PROFILE_INFO: {
-            debugger;
             return {
                 ...state,
                 profileInfo: {
@@ -94,7 +93,6 @@ const profileReducer = (state=defaultState, action) => {
             }
         }*/
         case UPDATE_USER_STATUS: {
-            debugger;
             return {
                 ...state,
                 status: action.status
@@ -122,7 +120,6 @@ export const addPostActionCreator = (newPostValue) => ({
 }*/
 
 export const setProfileInfoActionCreator = (profileInfo) => {
-    debugger;
     return {
         type: SET_PROFILE_INFO,
         profileInfo
@@ -142,21 +139,16 @@ export const toggleIsLoadingActionCreator = (isLoading) => {
 //thunks
 
 export const getUserProfileThunkCreator = (userId) => {
-    debugger;
     return (dispatch) => {
-        debugger;
         profileAPI.getUserProfile(userId)
             .then((data) => {
-                debugger;
                 console.log(data);
                 dispatch(setProfileInfoActionCreator(data));
-                debugger;
             })
     }
 }
 
 export const updateUserStatusActionCreator = (status) => {
-    debugger;
     return {
         type: UPDATE_USER_STATUS,
         status
@@ -164,11 +156,9 @@ export const updateUserStatusActionCreator = (status) => {
 }
 
 export const updateUserStatusThunkCreator = (status) => (dispatch) => {
-    debugger;
     profileAPI.updateUserStatus(status)
         .then((data) => {
             if (data.resultCode === 0) {
-                debugger;
                 dispatch(updateUserStatusActionCreator(status));
             }
         })
@@ -178,7 +168,6 @@ export const getUserStatusThunkCreator = (userId) => (dispatch) => {
     debugger;
     profileAPI.getUserStatus(userId)
         .then((status) => {
-            debugger;
             dispatch(updateUserStatusActionCreator(status));
         })
 }

@@ -6,30 +6,32 @@ import {setCurrentPageActionCreator} from "../../store/users-reducer";
 import {setUsersThunkCreator, followThunkCreator, unfollowThunkCreator} from '../../store/users-reducer'
 import Preloader from "../common/Preloader";
 import withAuthRedirect from "../../hoc/withAuthRedirect";
+import {
+    getArrayUsersWithDisabledId,
+    getCurrentPage,
+    getIsLoading,
+    getPageSize,
+    getTotalUsersCount,
+    getUsers, getUsersWithReselect
+} from "../../store/users-selector";
 
 class UsersContainerAPI extends React.Component {
-    debugger;
     constructor(props) {
         super(props);
         this.props = props;
     }
 
     componentDidMount () {
-        debugger;
         this.props.getUsers(this.props.currentPage, this.props.pageSize);
-
     }
 
     setCurrentPage = (currentPage) => {
-        debugger;
-
         this.props.setCurrentPage(currentPage);
         this.props.getUsers(currentPage, this.props.pageSize);
-
     }
 
     render () {
-
+        console.log('rerender Users')
         return (
             <>
                 {
@@ -51,14 +53,14 @@ class UsersContainerAPI extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-    debugger;
+    console.log('mapStateToProps UsersContainer')
     return {
-        users: state.usersPage.users,
-        totalUsersCount: state.usersPage.totalUsersCount,
-        pageSize: state.usersPage.pageSize,
-        currentPage: state.usersPage.currentPage,
-        isLoading: state.usersPage.isLoading,
-        arrayUsersWithDisabledId: state.usersPage.arrayUsersWithDisabledId
+        users: getUsers(state),
+        totalUsersCount: getTotalUsersCount(state),
+        pageSize: getPageSize(state),
+        currentPage: getCurrentPage(state),
+        isLoading: getIsLoading(state),
+        arrayUsersWithDisabledId: getArrayUsersWithDisabledId(state)
     }
 }
 
@@ -73,16 +75,6 @@ const UsersContainer =  compose(
 
 export default UsersContainer;
 
-/*const withAuthRedirectContainer = withAuthRedirect(UsersContainerAPI);
-
-const UsersContainer = connect(mapStateToProps, {
-    setCurrentPage: setCurrentPageActionCreator,
-    getUsers: setUsersThunkCreator,
-    follow: followThunkCreator,
-    unfollow: unfollowThunkCreator
-})(withAuthRedirectContainer);
-
-export default UsersContainer;*/
 
 
 

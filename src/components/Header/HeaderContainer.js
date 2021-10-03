@@ -3,37 +3,14 @@ import React from 'react';
 import Header from './Header';
 import {connect} from "react-redux";
 
-import * as axios from 'axios';
-import {logoutThunkCreator, setUserAuthDataActionCreator} from "../../store/auth-reducer";
+import {logoutThunkCreator} from "../../store/auth-reducer";
 
 import {getUserAuthDataThunkCreator} from "../../store/auth-reducer";
-
-import {authMeAPI} from "../../api/api";
 import {compose} from "redux";
+import {getIsAuth, getLogin} from "../../store/auth-selector";
 
 class HeaderContainerAPI extends React.Component{
-    /*componentDidMount() {
-        debugger;
-        /!*axios.get(`https://social-network.samuraijs.com/api/1.0/auth/me`,
-            {
-                withCredentials: true
-            })*!/
-        this.props.getUserAuthData();
-        /!*authMeAPI.getAuthData()
-            .then((data) => {
-                debugger;
-                if(data.resultCode === 0) {
-                    debugger;
-                    const {id, email, login} = data.data;
-                    debugger;
-                    this.props.setUserAuthData(id, email, login);
-                    debugger;
-                }
-            })*!/
-    }*/
-
     render () {
-        debugger;
         return (
             <Header login={this.props.login} isAuth={this.props.isAuth} logout={this.props.logout}/>
         )
@@ -41,21 +18,11 @@ class HeaderContainerAPI extends React.Component{
 }
 
 const mapStateToProps = (state) => {
-    //debugger;
     return {
-        isAuth: state.auth.isAuth,
-        login: state.auth.login
+        isAuth: getIsAuth(state),
+        login: getLogin(state)
     }
 }
-
-/*const mapDispatchToProps = (dispatch) => {
-    //debugger;
-    return {
-        setUserAuthData (id, email, login) {
-            dispatch(setUserAuthDataActionCreator(id, email, login))
-        }
-    }
-}*/
 
 const HeaderContainer = compose(
     connect(mapStateToProps, {
@@ -65,7 +32,3 @@ const HeaderContainer = compose(
 )(HeaderContainerAPI);
 
 export default HeaderContainer;
-
-/*const HeaderContainer = connect(mapStateToProps, {getUserAuthData: getUserAuthDataThunkCreator})(HeaderContainerAPI);
-
-export default HeaderContainer;*/
