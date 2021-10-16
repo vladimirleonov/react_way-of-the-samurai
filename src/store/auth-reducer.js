@@ -38,40 +38,35 @@ export const setUserAuthDataActionCreator = (id, email, login, isAuth = false) =
 }
 
 export const getUserAuthDataThunkCreator = () => {
-    return (dispatch) => {
-        return authMeAPI.getAuthData()
-            .then((data) => {
-                if(data.resultCode === 0) {
-                    const {id, email, login} = data.data;
-                    dispatch(setUserAuthDataActionCreator(id, email, login, true));
-                }
-            })
+    return async (dispatch) => {
+        const data = await authMeAPI.getAuthData();
+        if(data.resultCode === 0) {
+            const {id, email, login} = data.data;
+            dispatch(setUserAuthDataActionCreator(id, email, login, true));
+        }
     }
 }
 
 export const logoutThunkCreator = () => {
-    return (dispatch) => {
-        authMeAPI.logout()
-            .then((data) => {
-                if (data.resultCode === 0) {
-                    alert('loged out');
-                    dispatch(setUserAuthDataActionCreator(null, null, null, false));
-                }
-            })
+    return async (dispatch) => {
+        const data = await authMeAPI.logout()
+        if (data.resultCode === 0) {
+            alert('loged out');
+            dispatch(setUserAuthDataActionCreator(null, null, null, false));
+        }
     }
 }
 
 export const loginThunkCreator = (email, password, rememberMe) => {
-    return (dispatch) => {
-        authMeAPI.login (email, password, rememberMe)
-            .then((data) => {
-                if(data.resultCode === 0) {
-                    alert('loged in');
-                    dispatch(getUserAuthDataThunkCreator());
-                } else {
-                    dispatch(stopSubmit('login', {_error: data.messages[0]}))
-                }
-            })
+    return async (dispatch) => {
+        const data = await authMeAPI.login (email, password, rememberMe)
+        if(data.resultCode === 0) {
+            alert('loged in');
+            dispatch(getUserAuthDataThunkCreator());
+        } else {
+            dispatch(stopSubmit('login', {_error: data.messages[0]}))
+        }
+
     }
 }
 

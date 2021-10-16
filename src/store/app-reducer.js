@@ -28,10 +28,8 @@ export const initializeAppActionCreator = () => {
     }
 }
 
-export const initializeAppThunkCreator = () => (dispatch) => {
+export const initializeAppThunkCreator = () => async (dispatch) => {
     const promise = dispatch(getUserAuthDataThunkCreator());
-    Promise.all([promise])
-        .then(() => {
-            dispatch(initializeAppActionCreator());
-        })
+    await Promise.all([promise])
+    dispatch(initializeAppActionCreator());
 }

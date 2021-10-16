@@ -152,40 +152,34 @@ export const changeButtonConditionActionCreator = (isChangingBtnCondition, userI
 //thunk creators
 
 export const setUsersThunkCreator = (currentPage, pageSize) => {
-    return (dispatch) => {
+    return async (dispatch) => {
         dispatch(toggleIsLoadingActionCreator(true));
-        usersAPI.getUsers(currentPage, pageSize)
-            .then((data) => {
-                dispatch(toggleIsLoadingActionCreator(false));
-                dispatch(setUsersActionCreator(data.items));
-                dispatch(setTotalUsersCountActionCreator(data.totalCount));
-            })
+        const data = await usersAPI.getUsers(currentPage, pageSize)
+        dispatch(toggleIsLoadingActionCreator(false));
+        dispatch(setUsersActionCreator(data.items));
+        dispatch(setTotalUsersCountActionCreator(data.totalCount));
     }
 }
 
 export const followThunkCreator = (userId) => {
-    return (dispatch) => {
+    return async (dispatch) => {
         dispatch(changeButtonConditionActionCreator(true, userId));
-        usersAPI.follow(userId)
-            .then((data) => {
-                if (data.resultCode === 0) {
-                    dispatch(changeButtonConditionActionCreator(false, userId));
-                    dispatch(followActionCreator(userId));
-                }
-            })
+        const data = await usersAPI.follow(userId)
+        if (data.resultCode === 0) {
+            dispatch(changeButtonConditionActionCreator(false, userId));
+            dispatch(followActionCreator(userId));
+        }
     }
 }
 
 export const unfollowThunkCreator = (userId) => {
-    return (dispatch) => {
+    return async (dispatch) => {
         dispatch(changeButtonConditionActionCreator(true, userId));
-        usersAPI.unfollow(userId)
-            .then((data) => {
-                if (data.resultCode === 0) {
-                    dispatch(changeButtonConditionActionCreator(false, userId));
-                    dispatch(unfollowActionCreator(userId));
-                }
-            })
+        const data = await usersAPI.unfollow(userId)
+        if (data.resultCode === 0) {
+            dispatch(changeButtonConditionActionCreator(false, userId));
+            dispatch(unfollowActionCreator(userId));
+        }
     }
 }
 

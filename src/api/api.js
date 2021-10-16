@@ -12,58 +12,54 @@ const instance = axios.create({
 
 
 export const usersAPI = {
-    getUsers (currentPage = 1, pageSize = 10) {
-        return instance.get(`users?page=${currentPage}&count=${pageSize}`)
-            .then(response => response.data)
+    async getUsers (currentPage = 1, pageSize = 10) {
+        const response = await instance.get(`users?page=${currentPage}&count=${pageSize}`);
+        return response.data;
     },
-    follow (userId) {
-        return instance.post(`follow/${userId}`)
-            .then(response => response.data)
+    async follow (userId) {
+        const response = await instance.post(`follow/${userId}`);
+        return response.data;
     },
-    unfollow (userId) {
-        return instance.delete(`follow/${userId}`)
-            .then(response => response.data)
+    async unfollow (userId) {
+        const response = await instance.delete(`follow/${userId}`);
+        return response.data;
     }
 }
 
 export const profileAPI = {
-    getUserProfile (userId) {
+    async getUserProfile (userId) {
         //https://social-network.samuraijs.com/api/1.0/profile/' + userId
-        return instance.get(`profile/${userId}`)
-            .then((response) => {
-                return response.data;
-            })
+        const response = await instance.get(`profile/${userId}`)
+        return response.data;
     },
-    getUserStatus (userId) {
-        return instance.get(`profile/status/${userId}`)
-            .then(response => response.data)
+    async getUserStatus (userId) {
+        const response = await instance.get(`profile/status/${userId}`);
+        return response.data;
     },
-    updateUserStatus (status) {
-        return instance.put(`profile/status`, {
+    async updateUserStatus (status) {
+        const response = await instance.put(`profile/status`, {
             status
-        }).then(response => response.data
-        )
+        });
+        return response.data;
     }
 }
 
 export const authMeAPI = {
-    getAuthData () {
-        return instance.get(`/auth/me`)
-            .then((response) => {
-                return response.data;
-            })
+    async getAuthData () {
+        const response = await instance.get(`/auth/me`);
+        return response.data;
     },
-    logout () {
-        return instance.delete(`/auth/login`)
-            .then(response => response.data)
+    async logout () {
+        const response = await instance.delete(`/auth/login`);
+        return response.data;
     },
-    login (email, password, rememberMe = false) {
-        return instance.post(`/auth/login`, {
+    async login (email, password, rememberMe = false) {
+        const response = await instance.post(`/auth/login`, {
             email,
             password,
             rememberMe
-        })
-            .then(response => response.data)
+        });
+        return response.data;
     }
 }
 

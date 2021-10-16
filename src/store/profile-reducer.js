@@ -135,18 +135,6 @@ export const toggleIsLoadingActionCreator = (isLoading) => {
     }
 }*/
 
-
-//thunks
-
-export const getUserProfileThunkCreator = (userId) => {
-    return (dispatch) => {
-        profileAPI.getUserProfile(userId)
-            .then((data) => {
-                dispatch(setProfileInfoActionCreator(data));
-            })
-    }
-}
-
 export const updateUserStatusActionCreator = (status) => {
     return {
         type: UPDATE_USER_STATUS,
@@ -154,18 +142,24 @@ export const updateUserStatusActionCreator = (status) => {
     }
 }
 
-export const updateUserStatusThunkCreator = (status) => (dispatch) => {
-    profileAPI.updateUserStatus(status)
-        .then((data) => {
-            if (data.resultCode === 0) {
-                dispatch(updateUserStatusActionCreator(status));
-            }
-        })
+
+//thunks
+
+export const getUserProfileThunkCreator = (userId) => {
+    return async (dispatch) => {
+        const data = await profileAPI.getUserProfile(userId)
+        dispatch(setProfileInfoActionCreator(data));
+    }
 }
 
-export const getUserStatusThunkCreator = (userId) => (dispatch) => {
-    profileAPI.getUserStatus(userId)
-        .then((status) => {
-            dispatch(updateUserStatusActionCreator(status));
-        })
+export const updateUserStatusThunkCreator = (status) => async (dispatch) => {
+    const data = await profileAPI.updateUserStatus(status)
+    if (data.resultCode === 0) {
+        dispatch(updateUserStatusActionCreator(status));
+    }
+}
+
+export const getUserStatusThunkCreator = (userId) => async (dispatch) => {
+    const status = await profileAPI.getUserStatus(userId)
+    dispatch(updateUserStatusActionCreator(status));
 }
